@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< Updated upstream
     tools:context=".SplashActivity">
 
     <TextView
@@ -16,3 +17,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+    android:gravity="center"
+    tools:context=".activity.SplashActivity">
+    <ImageView
+        android:id="@+id/activity_splash_splashLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_baseline_android_24"></ImageView>
+</LinearLayout>
+>>>>>>> Stashed changes
