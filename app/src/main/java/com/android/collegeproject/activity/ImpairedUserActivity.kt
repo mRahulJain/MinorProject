@@ -46,6 +46,7 @@ class ImpairedUserActivity : AppCompatActivity() {
                 if(!mAndroidPermission.checkPermissionForMicrophone()) {
                     //don't perform anything if permission is denied
                 } else {
+                    mTextToSpeechHelper.destroySpeech()
                     val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
                     intent.putExtra(
                         RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -131,14 +132,13 @@ class ImpairedUserActivity : AppCompatActivity() {
                     val intent = Intent(this@ImpairedUserActivity, NewsActivity::class.java)
                     startActivity(intent)
                 }
-                data!![0].toString().toLowerCase() == "c" -> {
+                data!![0].toString().toLowerCase() == "help" -> {
                     mTextToSpeechHelper.destroySpeech()
-//                    if(this@MainActivity::sr.isInitialized) {
-//                        sr.destroy()
-//                    }
-//                    startActivity(Intent(this@MainActivity, ScanCodeActivity::class.java))
+                    val helpText = "Welcome to Hear Us! We are here to help you,  perform your day-to-day activities more independently. \n" +
+                            "By using this app you can Identify the objects by clicking a picture and hear the app speak the identification back to you. Hear Us is an accessible reading tool with an advanced text-to-speech feature. It describes the environment by giving you updates on the weather and the latest news. This app helps you to identify details of various products by scanning their barcode, in shopping marts or anywhere you go. It's very simple and easy to use!"
+                    Constants().speak(helpText, mTextToSpeechHelper)
                 }
-                data!![0].toString().toLowerCase() == "d" -> {
+                data!![0].toString().toLowerCase() == "keywords" -> {
 //                    startActivity(Intent(this@MainActivity, TextRecognition::class.java))
                 }
                 else -> {

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
+    android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical">
@@ -17,14 +17,17 @@
         android:layout_height="wrap_content"/>
     <ImageView
         android:id="@+id/intro_slider_pageImage"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/img_intro_1" />
+        android:src="@drawable/img_path_hurdle" />
     <TextView
         android:id="@+id/intro_slider_pageDescription"
         android:layout_marginTop="30dp"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@android:color/black"
         android:text="Here is a sample text"
         android:gravity="center"
