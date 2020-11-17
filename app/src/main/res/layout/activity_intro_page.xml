@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:weightSum="10"
+    android:orientation="vertical">
+    <androidx.viewpager.widget.ViewPager
+        android:padding="20dp"
+        android:layout_weight="5"
+        android:id="@+id/activity_intro_page_sliderView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp" />
+    <com.google.android.material.tabs.TabLayout
+        app:tabBackground="@drawable/view_pager_dots"
+        app:tabGravity="center"
+        app:tabPaddingStart="6dp"
+        app:tabPaddingEnd="6dp"
+        android:layout_weight="2"
+        app:tabIndicatorHeight="0dp"
+        app:tabIndicatorFullWidth="false"
+        android:layout_marginBottom="40dp"
+        android:layout_gravity="top"
+        android:id="@+id/activity_intro_page_sliderTabs"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+    <TextView
+        android:id="@+id/activity_intro_page_nextTutorialBtn"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="1"
+        android:layout_marginBottom="20dp"
+        android:textColor="@android:color/black"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="18sp"
+        android:text="SKIP" />
+</LinearLayout>
