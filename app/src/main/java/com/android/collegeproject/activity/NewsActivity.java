@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,7 +30,6 @@ public class NewsActivity extends AppCompatActivity {
 
     private TextToSpeechHelper mTextToSpeechHelper;
     private Constants constants;
-
     public NewsModelClass newsModelBody;
     Sources sources;
     String newsBaseUrl = "https://newsapi.org";
@@ -48,7 +48,6 @@ public class NewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-
         mTextToSpeechHelper = new TextToSpeechHelper(this);
         constants = new Constants();
 

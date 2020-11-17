@@ -27,6 +27,7 @@ class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
 
     override fun onBindViewHolder(holder: NameViewHolder, position: Int) {
         holder.itemView.activity_news_tile_headline.text = newsModelClass.articles[position].title
+        holder.itemView.activity_news_tile_headline.isSelected = true
         holder.itemView.activity_news_tile_description.text = newsModelClass.articles[position].description
     }
 

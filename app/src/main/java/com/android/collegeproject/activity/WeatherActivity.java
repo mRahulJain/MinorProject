@@ -151,9 +151,9 @@ public class WeatherActivity extends AppCompatActivity {
         String base = "https://openweathermap.org/img/wn/"+mBody.getWeather().get(0).getIcon()+"@2x.png";
 
         weatherDetails = "Details fetched successfully!\nIt’s clear in "+mBody.getName()+", today. " +
-                "Current temperature is "+(mBody.getMain().getTemp()+"").substring(0,5)+" degree Celsius," +
-                " with maximum temperature of "+(mBody.getMain().getTemp_max()+"").substring(0,5)+" " +
-                "degree C and minimum temperature of "+(mBody.getMain().getTemp_min()+"").substring(0,5)+" " +
+                "Current temperature is "+String.format("%.2f",mBody.getMain().getTemp())+" degree Celsius," +
+                " with maximum temperature of "+String.format("%.2f",mBody.getMain().getTemp_max())+" " +
+                "degree C and minimum temperature of "+String.format("%.2f",mBody.getMain().getTemp_min())+" " +
                 "degree Celsius, as recorded.\n\n\n\nDouble tap to go back";
         constants.speak(weatherDetails, mTextToSpeechHelper);
 
