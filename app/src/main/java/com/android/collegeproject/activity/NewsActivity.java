@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.collegeproject.R;
 import com.android.collegeproject.adapter.NewsAdapter;
 import com.android.collegeproject.api.ApiNewsMethods;
+import com.android.collegeproject.helper.ClickListener;
 import com.android.collegeproject.helper.Constants;
 import com.android.collegeproject.helper.TextToSpeechHelper;
 import com.android.collegeproject.model.NewsModelClass;
@@ -63,10 +64,28 @@ public class NewsActivity extends AppCompatActivity {
         };
         initHandler.postDelayed(initRunnable, 500);
 
-        fetchTopHeadlines();
-        //text to speech command for 'Please tell us what you wanna hear for: 1) top headlines 2) everything or 3) the Sources'
+        Runnable topHeadRunnable = new Runnable() {
+            @Override
+            public void run() {
+                fetchTopHeadlines();
+            }
+        };
+        initHandler.postDelayed(topHeadRunnable,3000);
 
+        mMainScreen.setOnClickListener(new ClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onDoubleClick(View v) {
+                mTextToSpeechHelper.destroySpeech();
+                finish();
+            }
+        });
     }
+
 
     private  void initView(){
         mLoader = findViewById(R.id.activity_news_loader);
@@ -100,6 +119,16 @@ public class NewsActivity extends AppCompatActivity {
 
                     //Prepare speech
 
+                    StringBuilder newsText = new StringBuilder();
+                    String[] numbers = {"First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Nineth","Tenth",};
+                    int i = 0,j=newsModelBody.getArticles().size()>10?10:newsModelBody.getArticles().size();
+                    newsText.append("Headlines fetched successfully\n\n\n");
+                    while(i<j){
+                        newsText.append(numbers[i]+"\n"+newsModelBody.getArticles().get(i).getTitle()+"\n\n\n");
+                        i++;
+                    }
+                    newsText.append("Double Tap to go back\n\n\n");
+                    constants.speak(newsText.toString(),mTextToSpeechHelper);
                 } else {
                     Log.d("mySTRING", "DID NOT OCCUR");
                 }
@@ -154,5 +183,12 @@ public class NewsActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    //destroy speech helper
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mTextToSpeechHelper.destroySpeech();
     }
 }

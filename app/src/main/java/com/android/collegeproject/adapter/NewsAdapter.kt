@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.collegeproject.R
 import com.android.collegeproject.model.NewsModelClass
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_news_tile.view.*
 
 class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
@@ -26,8 +27,10 @@ class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
     }
 
     override fun onBindViewHolder(holder: NameViewHolder, position: Int) {
+        val base = newsModelClass.articles[position].urlToImage
         holder.itemView.activity_news_tile_headline.text = newsModelClass.articles[position].title
         holder.itemView.activity_news_tile_headline.isSelected = true
+        Picasso.with(context).load(base).into(holder.itemView.activity_news_img)
         holder.itemView.activity_news_tile_description.text = newsModelClass.articles[position].description
     }
 
