@@ -3,6 +3,7 @@ package com.android.collegeproject.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import com.android.collegeproject.R
 import com.android.collegeproject.helper.Constants
 import com.android.collegeproject.helper.SwipeListener
@@ -19,15 +20,22 @@ class TextRecognitionTextActivity : AppCompatActivity() {
 
         mTextToSpeechHelper = TextToSpeechHelper(this)
 
+        val waitingText = "Generating your scanned document. \n please wait.\n\n\n"
+
+        //Constants().speak(waitingText, mTextToSpeechHelper)
+
         val string = intent.getStringExtra("text")
         activity_text_recognition_text_textView.text = string
 
-        //scanned text
-        Constants().speak("", mTextToSpeechHelper)
+        val scannedText = "The scanned docment says \n\n\n\n\n"+string
+        Handler().postDelayed({
+            Constants().speak(waitingText+scannedText, mTextToSpeechHelper)
+        }, 500)
 
         activity_text_recognition_text_mainScreen.setOnTouchListener(object : SwipeListener(this) {
             override fun onSwipeRight() {
-                val intent = Intent(this@TextRecognitionTextActivity, TextRecognitionActivity::class.java)
+                mTextToSpeechHelper.destroySpeech()
+                val intent = Intent(this@TextRecognitionTextActivity, ImpairedUserActivity::class.java)
                 startActivity(intent)
                 finish()
             }
