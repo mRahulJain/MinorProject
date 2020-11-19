@@ -132,22 +132,30 @@ class ImpairedUserActivity : AppCompatActivity() {
                     val intent = Intent(this@ImpairedUserActivity, NewsActivity::class.java)
                     startActivity(intent)
                 }
-                data!![0].toString().toLowerCase() == "help" -> {
+                data!![0].toString().toLowerCase(Locale.ROOT) == "help" -> {
                     mTextToSpeechHelper.destroySpeech()
                     val helpText = "Welcome to Hear Us! We are here to help you in performing your day-to-day activities more independently. \n\n" +
                             "By using this application you can Identify the objects by clicking a picture and hear the app speak the identification back to you. Hear Us is an accessible reading tool with an advanced text-to-speech feature. It describes the environment by giving you updates on the weather and the latest news. This app helps you to identify details of various products by scanning their barcode, in shopping marts or anywhere you go. It's very simple and easy to use! \n\n"+
-                            "To know how to access these features, kindly speak keywords"
+                            "To know how to access these features, kindly double tap and speak keywords"
                     Constants().speak(helpText, mTextToSpeechHelper)
                 }
-                data!![0].toString().toLowerCase() == "keywords" -> {
+                data!![0].toString().toLowerCase(Locale.ROOT) == "keywords" -> {
                     mTextToSpeechHelper.destroySpeech()
                     val keywordText = "hey! now i will tell you the keywords to proceed on our application \n\n\n\n"+"To identify objects by clicking a picture use keyword - DETECT\n\n"+
                             "To scan various products and view its details use keyword - PRODUCT\n\n"+
                             "To get live weather updates use keyword - WEATHER\n\n"+
                             "To hear daily news updates of your country use keyword - NEWS\n\n"+
                             "To read texts of documents, etc use keyword - READ\n\n"+
-                            "In case you got stuck anywhere take our help by using keyword - HELP\n\n"
+                            "In case you get stuck anywhere take our help by using keyword - HELP\n\n"
                     Constants().speak(keywordText, mTextToSpeechHelper)
+                }
+                data!![0].toString().toLowerCase(Locale.ROOT) == "read" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    val intent = Intent(this@ImpairedUserActivity, TextRecognitionActivity::class.java)
+                    startActivity(intent)
                 }
                 else -> {
                     Constants().speak("Sorry couldn't hear you!", mTextToSpeechHelper)

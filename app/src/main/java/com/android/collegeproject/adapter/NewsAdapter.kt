@@ -1,11 +1,13 @@
 package com.android.collegeproject.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.collegeproject.R
+import com.android.collegeproject.helper.ClickListener
 import com.android.collegeproject.model.NewsModelClass
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_news_tile.view.*
@@ -32,6 +34,17 @@ class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
         holder.itemView.activity_news_tile_headline.isSelected = true
         Picasso.with(context).load(base).into(holder.itemView.activity_news_img)
         holder.itemView.activity_news_tile_description.text = newsModelClass.articles[position].description
+
+        holder.itemView.activity_news_tile_main.setOnClickListener(object : ClickListener() {
+            override fun onSingleClick(v: View?) {
+                //do nothing
+            }
+
+            override fun onDoubleClick(v: View?) {
+                (context as Activity).finish()
+            }
+
+        })
     }
 
 

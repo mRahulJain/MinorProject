@@ -120,7 +120,7 @@ public class NewsActivity extends AppCompatActivity {
                     //Prepare speech
 
                     StringBuilder newsText = new StringBuilder();
-                    String[] numbers = {"First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Nineth","Tenth",};
+                    String[] numbers = {"First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Ninth","Tenth",};
                     int i = 0,j=newsModelBody.getArticles().size()>10?10:newsModelBody.getArticles().size();
                     newsText.append("Headlines fetched successfully\n\n\n");
                     while(i<j){

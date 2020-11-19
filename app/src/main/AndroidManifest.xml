@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.collegeproject">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,11 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PermissionActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity android:name=".activity.SplashActivity"
+        <activity android:name=".activity.TextRecognitionTextActivity"></activity>
+        <activity android:name=".activity.TextRecognitionActivity" />
+        <activity
+            android:name=".activity.PermissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,14 +30,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ImpairedUserActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.IntroPageActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.WeatherActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.NewsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ImpairedUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.IntroPageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WeatherActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NewsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

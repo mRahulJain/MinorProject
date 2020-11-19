@@ -39,5 +39,12 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.ibm.watson:ibm-watson:8.5.0'
+    implementation 'com.ibm.watson:ibm-watson:8.5.0'
+
+    //text recognition
+    implementation 'com.google.android.gms:play-services-vision:20.1.0'
+
+    //barcode and qr code scanner
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
 }
