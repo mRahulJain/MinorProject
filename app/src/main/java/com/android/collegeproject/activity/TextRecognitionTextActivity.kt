@@ -22,15 +22,17 @@ class TextRecognitionTextActivity : AppCompatActivity() {
 
         val waitingText = "Generating your scanned document. \n please wait.\n\n\n"
 
-        //Constants().speak(waitingText, mTextToSpeechHelper)
-
         val string = intent.getStringExtra("text")
-        activity_text_recognition_text_textView.text = string
 
-        val scannedText = "The scanned docment says \n\n\n\n\n"+string
         Handler().postDelayed({
-            Constants().speak(waitingText+scannedText, mTextToSpeechHelper)
+            Constants().speak(waitingText, mTextToSpeechHelper)
         }, 500)
+
+        Handler().postDelayed({
+            activity_text_recognition_text_textView.text = string
+            val scannedText = "The scanned document says \n\n\n\n\n$string"
+            Constants().speak(waitingText+scannedText, mTextToSpeechHelper)
+        }, 1000)
 
         activity_text_recognition_text_mainScreen.setOnTouchListener(object : SwipeListener(this) {
             override fun onSwipeRight() {
@@ -50,5 +52,11 @@ class TextRecognitionTextActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    //destroy speech
+    override fun onDestroy() {
+        super.onDestroy()
+        mTextToSpeechHelper.destroySpeech()
     }
 }

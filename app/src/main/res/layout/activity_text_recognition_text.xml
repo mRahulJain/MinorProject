@@ -1,39 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mlns="http://schemas.android.com/apk/res-auto"
+    mlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".activity.TextRecognitionTextActivity"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.appcompat.widget.Toolbar
+    android:id="@+id/activity_text_recognition_text_mainScreen"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="0dp"
+        android:text="Here is the sample text"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:id="@+id/activity_text_recognition_text_textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:titleTextColor="#ffeb707a"
-        app:title="Text Recognition"
-        android:textAlignment="center"
-        android:elevation="50dp"
-        app:liftOnScroll="true"
-        android:outlineAmbientShadowColor="@android:color/black"
-        android:outlineSpotShadowColor="@android:color/black"/>
-    <ScrollView
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/activity_text_recognition_text_mainScreen">
-        <TextView
-            android:textSize="20sp"
-            android:layout_marginTop="30dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="0dp"
-            android:text="Here is the sample text"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textStyle="italic"
-            android:id="@+id/activity_text_recognition_text_textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </ScrollView>
-</LinearLayout>
+        android:layout_height="match_parent"/>
+</ScrollView>

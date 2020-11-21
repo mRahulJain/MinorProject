@@ -35,9 +35,9 @@ class TextRecognitionActivity : AppCompatActivity() {
         mAndroidPermissions = AndroidPermissions(this)
         mTextToSpeechHelper = TextToSpeechHelper(this)
 
-        val loadingString = "Hello! \n\n To scan a document kindly hold it firmly or place it on a surface.\n\n"+
+        val loadingString = "Hello! \n\n\n To scan a document kindly hold your phone firmly or place it on a surface.\n\n"+
                 " use your phone's camera to scan the document \n wait for a few seconds. \n\n"+
-                "then swipe up to hear the scanned document\n\n\n"
+                "then swipe up to hear the scanned document\n\n\n\n\nYou can swipe right to go back."
         Handler().postDelayed({
             Constants().speak(loadingString, mTextToSpeechHelper)
         }, 500)
@@ -114,7 +114,8 @@ class TextRecognitionActivity : AppCompatActivity() {
                                             else
                                                 stringBuilder.append("\n")
                                         }
-                                        val text = "\" "+"$stringBuilder"+"\n\n\n Thats all! \n\n Swipe right to return to the main screen"
+                                        val text =
+                                            "\" $stringBuilder\n\n\n That's all! \n\n Swipe right to return to the main screen"
                                         val intent = Intent(this@TextRecognitionActivity, TextRecognitionTextActivity::class.java)
                                         intent.putExtra("text", text)
                                         startActivity(intent)
