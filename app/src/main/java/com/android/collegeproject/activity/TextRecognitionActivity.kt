@@ -8,7 +8,6 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.android.collegeproject.R
 import com.android.collegeproject.helper.*
@@ -82,6 +81,7 @@ class TextRecognitionActivity : AppCompatActivity() {
         mCameraView.setOnTouchListener(object : SwipeListener(this) {
             override fun onSwipeRight() {
                 //close window
+                mTextToSpeechHelper.destroySpeech()
                 finish()
             }
 

@@ -60,7 +60,6 @@ class IntroPageActivity : AppCompatActivity() {
 
             override fun onPageScrollStateChanged(state: Int) {
             }
-
         })
 
         activity_intro_page_nextTutorialBtn.setOnClickListener {
@@ -133,7 +132,6 @@ class IntroPageActivity : AppCompatActivity() {
                     view!!.intro_slider_pageDescription.text = "All you have to do is to double tap your screen and speak some fixed keywords to access all the features. The keywords can be known by saying \"HELP\"."
                 }
             }
-
             return view
         }
     }

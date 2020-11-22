@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:mlns="http://schemas.android.com/apk/res-auto"
-    mlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".activity.TextRecognitionTextActivity"

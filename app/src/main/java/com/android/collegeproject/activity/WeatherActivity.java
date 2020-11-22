@@ -15,6 +15,7 @@ import com.android.collegeproject.helper.AndroidPermissions;
 import com.android.collegeproject.helper.ClickListener;
 import com.android.collegeproject.helper.Constants;
 import com.android.collegeproject.helper.LocationHelper;
+import com.android.collegeproject.helper.SwipeListener;
 import com.android.collegeproject.helper.TextToSpeechHelper;
 import com.android.collegeproject.model.WeatherModelClass;
 import com.squareup.picasso.Picasso;
@@ -100,17 +101,19 @@ public class WeatherActivity extends AppCompatActivity {
             }, 5000);
 
             //exit page
-            mMainScreen.setOnClickListener(new ClickListener() {
+            mMainScreen.setOnTouchListener(new SwipeListener(this){
                 @Override
-                public void onSingleClick(View v) {
-                    //do nothing
-                }
-
-                @Override
-                public void onDoubleClick(View v) {
+                public void onSwipeRight() {
                     mTextToSpeechHelper.destroySpeech();
                     finish();
                 }
+
+                @Override
+                public void onSwipeLeft() {}
+                @Override
+                public void onSwipeTop() {}
+                @Override
+                public void onSwipeBottom() { }
             });
         }
         else {
@@ -154,7 +157,7 @@ public class WeatherActivity extends AppCompatActivity {
                 "Current temperature is "+String.format("%.2f",mBody.getMain().getTemp())+" degree Celsius," +
                 " with maximum temperature of "+String.format("%.2f",mBody.getMain().getTemp_max())+" " +
                 "degree C and minimum temperature of "+String.format("%.2f",mBody.getMain().getTemp_min())+" " +
-                "degree Celsius, as recorded.\n\n\n\nDouble tap to go back";
+                "degree Celsius, as recorded.\n\n\n\n Swipe Right to go back";
         constants.speak(weatherDetails, mTextToSpeechHelper);
 
         mLoader.setVisibility(View.GONE);

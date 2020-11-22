@@ -146,7 +146,8 @@ class ImpairedUserActivity : AppCompatActivity() {
                             "To get live weather updates use keyword - WEATHER\n\n"+
                             "To hear daily news updates of your country use keyword - NEWS\n\n"+
                             "To read texts of documents, etc use keyword - READ\n\n"+
-                            "In case you get stuck anywhere take our help by using keyword - HELP\n\n"
+                            "In case you get stuck anywhere take our help by using keyword - HELP\n\n"+
+                            "\n\n Throughout the app swipe right to go back from any screen"
                     Constants().speak(keywordText, mTextToSpeechHelper)
                 }
                 data!![0].toString().toLowerCase(Locale.ROOT) == "read" -> {

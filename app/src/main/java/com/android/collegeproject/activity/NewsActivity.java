@@ -17,6 +17,7 @@ import com.android.collegeproject.adapter.NewsAdapter;
 import com.android.collegeproject.api.ApiNewsMethods;
 import com.android.collegeproject.helper.ClickListener;
 import com.android.collegeproject.helper.Constants;
+import com.android.collegeproject.helper.SwipeListener;
 import com.android.collegeproject.helper.TextToSpeechHelper;
 import com.android.collegeproject.model.NewsModelClass;
 import com.android.collegeproject.model.Sources;
@@ -72,17 +73,19 @@ public class NewsActivity extends AppCompatActivity {
         };
         initHandler.postDelayed(topHeadRunnable,3000);
 
-        mMainScreen.setOnClickListener(new ClickListener() {
-            @Override
-            public void onSingleClick(View v) {
-                //Do Nothing
-            }
+        mMainScreen.setOnTouchListener(new SwipeListener(this){
 
             @Override
-            public void onDoubleClick(View v) {
+            public void onSwipeRight() {
                 mTextToSpeechHelper.destroySpeech();
                 finish();
             }
+            @Override
+            public void onSwipeLeft() {}
+            @Override
+            public void onSwipeTop() {}
+            @Override
+            public void onSwipeBottom() {}
         });
     }
 
@@ -127,7 +130,7 @@ public class NewsActivity extends AppCompatActivity {
                         newsText.append(numbers[i]+"\n"+newsModelBody.getArticles().get(i).getTitle()+"\n\n\n");
                         i++;
                     }
-                    newsText.append("Double Tap to go back\n\n\n");
+                    newsText.append("Swipe Right to go back\n\n\n");
                     constants.speak(newsText.toString(),mTextToSpeechHelper);
                 } else {
                     Log.d("mySTRING", "DID NOT OCCUR");
