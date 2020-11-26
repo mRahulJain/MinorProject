@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.ImageCaptioningActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextureView
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="160dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:id="@+id/activity_image_captioning_textureView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <Button
+        android:alpha="0"
+        android:id="@+id/activity_image_captioning_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</FrameLayout>

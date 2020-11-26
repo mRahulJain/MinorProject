@@ -132,6 +132,14 @@ class ImpairedUserActivity : AppCompatActivity() {
                     val intent = Intent(this@ImpairedUserActivity, NewsActivity::class.java)
                     startActivity(intent)
                 }
+                data!![0].toString().toLowerCase(Locale.ROOT) == "detect" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    val intent = Intent(this@ImpairedUserActivity, ImageCaptioningActivity::class.java)
+                    startActivity(intent)
+                }
                 data!![0].toString().toLowerCase(Locale.ROOT) == "help" -> {
                     mTextToSpeechHelper.destroySpeech()
                     val helpText = "Welcome to Hear Us! We are here to help you in performing your day-to-day activities more independently. \n\n" +

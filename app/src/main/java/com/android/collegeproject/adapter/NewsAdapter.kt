@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.collegeproject.R
-import com.android.collegeproject.helper.ClickListener
 import com.android.collegeproject.helper.SwipeListener
 import com.android.collegeproject.model.NewsModelClass
 import com.squareup.picasso.Picasso
@@ -37,13 +36,10 @@ class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
         holder.itemView.activity_news_tile_description.text = newsModelClass.articles[position].description
         holder.itemView.activity_news_tile_main.setOnTouchListener(object : SwipeListener(context){
             override fun onSwipeBottom() {
-                TODO("Not yet implemented")
             }
             override fun onSwipeLeft() {
-                TODO("Not yet implemented")
             }
             override fun onSwipeTop() {
-                TODO("Not yet implemented")
             }
             override fun onSwipeRight() {
                 (context as Activity).finish()
