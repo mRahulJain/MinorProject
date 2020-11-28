@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 
 public interface ApiImageCaptioning {
 
-    @POST("predict")
+    @POST("/predict")
     Call<Description> getDescription(
             @Body PostBody array
     );

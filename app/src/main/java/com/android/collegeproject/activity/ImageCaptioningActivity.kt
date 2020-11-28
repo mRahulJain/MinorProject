@@ -33,6 +33,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.jvm.Throws
 
 
 class ImageCaptioningActivity : AppCompatActivity() {
@@ -49,12 +50,15 @@ class ImageCaptioningActivity : AppCompatActivity() {
     private lateinit var cameraDevice: CameraDevice
     private lateinit var cameraCaptureSession: CameraCaptureSession
     private lateinit var captureRequestBuilder: CaptureRequest.Builder
+    private lateinit var mTextToSpeechHelper: TextToSpeechHelper
+
 
     private lateinit var imageDimension: Size
     private lateinit var handler: Handler
     private lateinit var backgroundThread: HandlerThread
 
-    val BASE_URL_IMAGE_CAPTIONING = "https://hear-us-app.herokuapp.com/"
+//    val BASE_URL_IMAGE_CAPTIONING = "https://hear-us-app.herokuapp.com/"
+    val BASE_URL_IMAGE_CAPTIONING = "http://192.168.1.68:4090/"
     var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL_IMAGE_CAPTIONING)
         .addConverterFactory(GsonConverterFactory.create())
@@ -63,6 +67,7 @@ class ImageCaptioningActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_captioning)
+        mTextToSpeechHelper = TextToSpeechHelper(this)
 
         activity_image_captioning_textureView.surfaceTextureListener = listener
 
@@ -215,6 +220,7 @@ class ImageCaptioningActivity : AppCompatActivity() {
                         val buffer = image.planes[0].buffer
                         var bytes = ByteArray(buffer.remaining())
                         buffer.get(bytes)
+                        Log.d("myBYTE","image available")
 
                         val body = PostBody(bytes)
 
@@ -231,10 +237,11 @@ class ImageCaptioningActivity : AppCompatActivity() {
                                         "myBYTE",
                                         "On Response Successful = " + description!!.description
                                     )
-                                    Constants().speak(
-                                        description!!.description,
-                                        TextToSpeechHelper(this@ImageCaptioningActivity)
-                                    )
+                                    Handler().postDelayed({
+                                        Constants().speak(
+                                            description!!.description, mTextToSpeechHelper
+                                        )
+                                    },500)
                                 } else {
                                     Log.d(
                                         "myBYTE",
@@ -262,7 +269,7 @@ class ImageCaptioningActivity : AppCompatActivity() {
                         result: TotalCaptureResult
                     ) {
                         super.onCaptureCompleted(session, request, result)
-                        Toast.makeText(this@ImageCaptioningActivity, "OKAY", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this@ImageCaptioningActivity, "OKAY", Toast.LENGTH_SHORT).show()
                         try {
                             createCameraPreview()
                         } catch (e: CameraAccessException) {

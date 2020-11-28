@@ -88,9 +88,9 @@
         android:layout_weight="2" />
     <Button
         android:id="@+id/activity_get_permissions_continueBtn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="120dp"
+        android:layout_gravity="center"
         android:layout_marginVertical="5dp"
         android:background="@drawable/tap_btn_layer1"
         android:paddingHorizontal="30dp"
