@@ -5,5 +5,5 @@ data class Description(
 )
 
 data class PostBody(
-    val array: ByteArray = byteArrayOf()
+    val string1: String = ""
 )

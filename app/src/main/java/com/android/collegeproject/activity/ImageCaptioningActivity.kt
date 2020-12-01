@@ -11,6 +11,7 @@ import android.media.ImageReader
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
+import android.util.Base64
 import android.util.Log
 import android.util.Size
 import android.util.SparseIntArray
@@ -28,16 +29,17 @@ import com.android.collegeproject.model.Description
 import com.android.collegeproject.model.PostBody
 import com.google.common.net.MediaType.PNG
 import kotlinx.android.synthetic.main.activity_image_captioning.*
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import kotlin.jvm.Throws
 
 
 class ImageCaptioningActivity : AppCompatActivity() {
-
     private var ORIENTATIONS: SparseIntArray = SparseIntArray()
     init {
         ORIENTATIONS.append(Surface.ROTATION_0, 90)
@@ -52,30 +54,75 @@ class ImageCaptioningActivity : AppCompatActivity() {
     private lateinit var captureRequestBuilder: CaptureRequest.Builder
     private lateinit var mTextToSpeechHelper: TextToSpeechHelper
 
-
+    var BASE64_STRING = ""
     private lateinit var imageDimension: Size
     private lateinit var handler: Handler
     private lateinit var backgroundThread: HandlerThread
 
-//    val BASE_URL_IMAGE_CAPTIONING = "https://hear-us-app.herokuapp.com/"
-    val BASE_URL_IMAGE_CAPTIONING = "http://192.168.1.68:4090/"
-    var retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL_IMAGE_CAPTIONING)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
+//    val BASE_URL_IMAGE_CAPTIONING = "https://hear-us-app.herokuapp.com"
+    val BASE_URL_IMAGE_CAPTIONING = "http://${Constants().IMAGE_HOST}:4090"
+    private lateinit var retrofit: Retrofit
+    private lateinit var okHttpClient: OkHttpClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_captioning)
         mTextToSpeechHelper = TextToSpeechHelper(this)
+        okHttpClient = OkHttpClient.Builder()
+            .readTimeout(60,TimeUnit.SECONDS)
+            .build()
+
+        retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL_IMAGE_CAPTIONING)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
 
         activity_image_captioning_textureView.surfaceTextureListener = listener
 
         activity_image_captioning_button.setOnClickListener {
             takePicture()
+            Handler().postDelayed({
+                getDescription()
+            },500)
         }
     }
 
+    fun getDescription(){
+        val body = PostBody(BASE64_STRING)
+        val imageCaptioningService = retrofit.create(ApiImageCaptioning::class.java)
+        imageCaptioningService.getDescription(body).enqueue(object :
+            Callback<Description> {
+            override fun onResponse(
+                call: Call<Description>,
+                response: Response<Description>
+            ) {
+                if (response.isSuccessful) {
+                    val description = response.body()
+                    Log.d(
+                        "myBYTE",
+                        "On Response Successful = " + description!!.description
+                    )
+                    Handler().postDelayed({
+                        Constants().speak(
+                            description!!.description, mTextToSpeechHelper
+                        )
+                    },500)
+                } else {
+                    Log.d(
+                        "myBYTE",
+                        "On Response Not Successful = " + response.message()
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<Description>, t: Throwable) {
+                Log.d("myBYTE", "On Failure = " + t.localizedMessage)
+                Log.d("myBYTE", "On Failure = " + t.cause)
+                Log.d("myBYTE", "On Failure = " + t.message)
+            }
+        })
+    }
     private val listener = object : TextureView.SurfaceTextureListener {
         override fun onSurfaceTextureAvailable(p0: SurfaceTexture?, p1: Int, p2: Int) {
             openCamera()
@@ -220,41 +267,8 @@ class ImageCaptioningActivity : AppCompatActivity() {
                         val buffer = image.planes[0].buffer
                         var bytes = ByteArray(buffer.remaining())
                         buffer.get(bytes)
+                        BASE64_STRING = Base64.encodeToString(bytes, Base64.DEFAULT)
                         Log.d("myBYTE","image available")
-
-                        val body = PostBody(bytes)
-
-                        val imageCaptioningService = retrofit.create(ApiImageCaptioning::class.java)
-                        imageCaptioningService.getDescription(body).enqueue(object :
-                            Callback<Description> {
-                            override fun onResponse(
-                                call: Call<Description>,
-                                response: Response<Description>
-                            ) {
-                                if (response.isSuccessful) {
-                                    val description = response.body()
-                                    Log.d(
-                                        "myBYTE",
-                                        "On Response Successful = " + description!!.description
-                                    )
-                                    Handler().postDelayed({
-                                        Constants().speak(
-                                            description!!.description, mTextToSpeechHelper
-                                        )
-                                    },500)
-                                } else {
-                                    Log.d(
-                                        "myBYTE",
-                                        "On Response Not Successful = " + response.message()
-                                    )
-                                }
-                            }
-
-                            override fun onFailure(call: Call<Description>, t: Throwable) {
-                                Log.d("myBYTE", "On Failure = " + t.localizedMessage)
-                            }
-
-                        })
                     } catch (e: Exception) {
                         Log.d("myBYTE", "Exception = " + e.localizedMessage)
                     } finally {

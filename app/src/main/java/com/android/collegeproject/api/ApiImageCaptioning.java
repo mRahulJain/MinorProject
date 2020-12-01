@@ -11,6 +11,6 @@ public interface ApiImageCaptioning {
 
     @POST("/predict")
     Call<Description> getDescription(
-            @Body PostBody array
+            @Body PostBody body
     );
 }
