@@ -37,6 +37,11 @@ class ImpairedUserActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        activity_home_page_addBarcode.setOnClickListener {
+            val intent = Intent(this, AddBarcodeActivity::class.java)
+            startActivity(intent)
+        }
+
         activity_home_page_myTap.setOnClickListener(object : ClickListener() {
             override fun onSingleClick(v: View?) {
                 //do nothing
@@ -164,6 +169,15 @@ class ImpairedUserActivity : AppCompatActivity() {
                         sr.destroy()
                     }
                     val intent = Intent(this@ImpairedUserActivity, TextRecognitionActivity::class.java)
+                    startActivity(intent)
+                }
+                data!![0].toString().toLowerCase(Locale.ROOT) == "product" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    val intent = Intent(this@ImpairedUserActivity, ScanCodeActivity::class.java)
+                    intent.putExtra("purpose", "scan")
                     startActivity(intent)
                 }
                 else -> {

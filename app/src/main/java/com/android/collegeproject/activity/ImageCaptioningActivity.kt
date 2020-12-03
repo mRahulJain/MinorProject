@@ -17,7 +17,6 @@ import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.android.collegeproject.R
@@ -27,7 +26,6 @@ import com.android.collegeproject.helper.Constants
 import com.android.collegeproject.helper.TextToSpeechHelper
 import com.android.collegeproject.model.Description
 import com.android.collegeproject.model.PostBody
-import com.google.common.net.MediaType.PNG
 import kotlinx.android.synthetic.main.activity_image_captioning.*
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -60,7 +58,7 @@ class ImageCaptioningActivity : AppCompatActivity() {
     private lateinit var backgroundThread: HandlerThread
 
 //    val BASE_URL_IMAGE_CAPTIONING = "https://hear-us-app.herokuapp.com"
-    val BASE_URL_IMAGE_CAPTIONING = "http://${Constants().IMAGE_HOST}:4090"
+    val BASE_URL_IMAGE_CAPTIONING = "http://${Constants().IP_HOST}:4090"
     private lateinit var retrofit: Retrofit
     private lateinit var okHttpClient: OkHttpClient
 

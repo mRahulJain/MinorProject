@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".activity.AddBarcodeActivity">
+    <TextView
+        android:text="Product Barcode - "
+        android:id="@+id/activity_add_barcode_textViewBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_below="@+id/activity_add_barcode_textViewBarcode"
+        android:id="@+id/activity_add_barcode_editTextBarcode"
+        android:layout_width="match_parent"
+        android:editable="false"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_below="@id/activity_add_barcode_editTextBarcode"
+        android:id="@+id/activity_add_barcode_textViewName"
+        android:text="Product Name - "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:layout_below="@+id/activity_add_barcode_textViewName"
+        android:id="@+id/activity_add_barcode_editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:text="add"
+        android:layout_below="@id/activity_add_barcode_editTextName"
+        android:id="@+id/activity_add_barcode_addBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:text="Scan Again"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/activity_add_barcode_addBarcode"
+        android:id="@+id/activity_add_barcode_scanAgain"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
