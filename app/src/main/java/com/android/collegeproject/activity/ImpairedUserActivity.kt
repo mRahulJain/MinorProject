@@ -35,19 +35,22 @@ class ImpairedUserActivity : AppCompatActivity() {
         activity_home_page_popupBtn.setOnClickListener {
             val popupMenu: PopupMenu = PopupMenu(this,activity_home_page_popupBtn)
             popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                when(item.itemId) {
-                    R.id.activity_home_page_help -> {val intent = Intent(this, IntroPageActivity::class.java)
+                when (item.itemId) {
+                    R.id.activity_home_page_help -> {
+                        val intent = Intent(this, IntroPageActivity::class.java)
                         intent.putExtra("from", "homePage")
                         startActivity(intent)
-                    true
+                        true
                     }
                     R.id.activity_home_page_addBarcode -> {
                         val intent = Intent(this, AddBarcodeActivity::class.java)
                         startActivity(intent)
                         true
                     }
-                    R.id.activity_home_page_exit ->
-                        Toast.makeText(this@ImpairedUserActivity, "You Clicked : " + item.title, Toast.LENGTH_SHORT).show()
+                    R.id.activity_home_page_exit -> {
+                        finish()
+                        true
+                    }
                 }
                 true
             })
