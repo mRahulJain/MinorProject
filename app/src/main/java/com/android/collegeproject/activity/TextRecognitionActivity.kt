@@ -109,17 +109,14 @@ class TextRecognitionActivity : AppCompatActivity() {
                                         for(i in 0 until items.size() - 1) {
                                             val text = items[i]
                                             stringBuilder.append(text.value)
-                                            if (i == items.size()-2)
-                                                stringBuilder.append(" \"")
-                                            else
-                                                stringBuilder.append("\n")
+                                                stringBuilder.append("\t")
                                         }
-                                        val text =
-                                            "\" $stringBuilder\n\n\n That's all! \n\n Swipe right to return to the main screen"
+                                        val text = "$stringBuilder\n\n"
                                         val intent = Intent(this@TextRecognitionActivity, TextRecognitionTextActivity::class.java)
                                         intent.putExtra("text", text)
                                         startActivity(intent)
                                         mCameraSource.stop()
+                                        mTextToSpeechHelper.destroySpeech()
                                         finish()
                                     }
                                 }

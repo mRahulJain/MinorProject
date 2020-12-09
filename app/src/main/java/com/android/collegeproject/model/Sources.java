@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Sources{
     String status;
-    List<Source> sources;
+    List<NewsModelClass.Source> sources;
 
     public String getStatus() {
         return status;
@@ -14,11 +14,11 @@ public class Sources{
         this.status = status;
     }
 
-    public List<Source> getSource() {
+    public List<NewsModelClass.Source> getSource() {
         return sources;
     }
 
-    public void setSource(List<Source> sources) {
+    public void setSource(List<NewsModelClass.Source> sources) {
         this.sources = sources;
     }
 }

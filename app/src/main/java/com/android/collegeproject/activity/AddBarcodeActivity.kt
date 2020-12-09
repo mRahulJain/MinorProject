@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.collegeproject.R
 import com.android.collegeproject.api.ApiBarcode
+import com.android.collegeproject.helper.Constants
 import com.android.collegeproject.model.Product
 import kotlinx.android.synthetic.main.activity_add_barcode.*
 import retrofit2.Call
@@ -20,7 +21,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AddBarcodeActivity : AppCompatActivity() {
 
 
-    val IP_HOST = "http://192.168.29.193:4090"
+
+    val IP_HOST = "http://${Constants().IP_HOST}:4090"
     var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(IP_HOST)
         .addConverterFactory(GsonConverterFactory.create())

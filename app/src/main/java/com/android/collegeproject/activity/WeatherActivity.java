@@ -142,7 +142,7 @@ public class WeatherActivity extends AppCompatActivity {
         mTextViewMaxTemp = findViewById(R.id.activity_weather_updates_maxTemp);
         mTextViewMinTemp = findViewById(R.id.activity_weather_updates_minTemp);
         mTextViewNormalTemp = findViewById(R.id.textViewNormalTemp);
-        mTextViewHumidity = findViewById(R.id.activity_weather_updates_humidity);
+        //mTextViewHumidity = findViewById(R.id.activity_weather_updates_humidity);
         mTextViewSunRise = findViewById(R.id.activity_weather_updates_sunrise);
         mTextViewSunSet = findViewById(R.id.activity_weather_updates_sunset);
         mTextViewWindSpeed = findViewById(R.id.activity_weather_updates_windSpeed);
@@ -168,7 +168,7 @@ public class WeatherActivity extends AppCompatActivity {
         mTextViewMinTemp.setText(String.format("%.2f",mBody.getMain().getTemp_min())+" \u2103");
         mTextViewNormalTemp.setText(String.format("%.2f",mBody.getMain().getTemp())+" \u2103");
         mTextViewWindSpeed.setText(String.format("%.2f",mBody.getWind().getSpeed())+" Kmph");
-        mTextViewHumidity.setText(mBody.getMain().getHumidity()+"%");
+       // mTextViewHumidity.setText(mBody.getMain().getHumidity()+"%");
 
         Calendar calendar = Calendar.getInstance();
         Date date = new Date(mBody.getSys().getSunrise()*1000);

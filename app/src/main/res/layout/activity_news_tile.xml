@@ -6,10 +6,10 @@
     android:layout_height="wrap_content"
     android:elevation="15dp"
     android:id="@+id/activity_news_tile_main"
-    android:layout_margin="15dp"
-    android:layout_marginVertical="20dp"
+    android:layout_marginHorizontal="15dp"
+    android:layout_marginVertical="5dp"
     app:cardCornerRadius="10dp">
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
@@ -60,5 +60,69 @@
         android:textAlignment="center"
         android:textSize="15sp"
         android:id="@+id/activity_news_tile_description" />
-</LinearLayout>
+</LinearLayout>-->
+    <!--<LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:id="@+id/activity_news_list"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_weight="2"
+            android:gravity="left"
+            android:layout_margin="10dp"
+            android:padding="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Sources"
+                android:background="@drawable/tap_btn_layer1"
+                android:id="@+id/activity_news_tile_sources"
+                android:textAlignment="center"
+                android:padding="7dp"
+                android:textColor="@android:color/white" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:id="@+id/activity_news_tile_headline" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/activity_news_img"
+                android:scaleType="fitXY"/>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

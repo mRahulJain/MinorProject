@@ -87,6 +87,20 @@ public class NewsActivity extends AppCompatActivity {
             @Override
             public void onSwipeBottom() {}
         });
+        mRecyclerView.setOnTouchListener(new SwipeListener(this){
+
+            @Override
+            public void onSwipeRight() {
+                mTextToSpeechHelper.destroySpeech();
+                finish();
+            }
+            @Override
+            public void onSwipeLeft() {}
+            @Override
+            public void onSwipeTop() {}
+            @Override
+            public void onSwipeBottom() {}
+        });
     }
 
 
@@ -116,12 +130,9 @@ public class NewsActivity extends AppCompatActivity {
             public void onResponse(Call<NewsModelClass> call, Response<NewsModelClass> response) {
                 if(response.isSuccessful()) {
                     newsModelBody = response.body();
-
                     //change UI
                     newsUIChanges();
-
                     //Prepare speech
-
                     StringBuilder newsText = new StringBuilder();
                     String[] numbers = {"First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Ninth","Tenth",};
                     int i = 0,j=newsModelBody.getArticles().size()>10?10:newsModelBody.getArticles().size();

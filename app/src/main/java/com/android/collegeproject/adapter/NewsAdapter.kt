@@ -33,7 +33,7 @@ class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
         holder.itemView.activity_news_tile_headline.text = newsModelClass.articles[position].title
         holder.itemView.activity_news_tile_headline.isSelected = true
         Picasso.with(context).load(base).into(holder.itemView.activity_news_img)
-        holder.itemView.activity_news_tile_description.text = newsModelClass.articles[position].description
+        holder.itemView.activity_news_tile_sources.text = newsModelClass.articles[position].source.name
         holder.itemView.activity_news_tile_main.setOnTouchListener(object : SwipeListener(context){
             override fun onSwipeBottom() {
             }
@@ -46,7 +46,6 @@ class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
             }
         })
     }
-
 
     class NameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

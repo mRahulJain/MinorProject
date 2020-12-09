@@ -7,6 +7,7 @@ import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.collegeproject.R
@@ -31,16 +32,46 @@ class ImpairedUserActivity : AppCompatActivity() {
             Constants().speak("Double Tap and Speak", mTextToSpeechHelper)
         }, 500)
 
-        activity_home_page_infoBtn.setOnClickListener {
-            val intent = Intent(this, IntroPageActivity::class.java)
+        activity_home_page_popupBtn.setOnClickListener {
+            val popupMenu: PopupMenu = PopupMenu(this,activity_home_page_popupBtn)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when(item.itemId) {
+                    R.id.activity_home_page_help -> {val intent = Intent(this, IntroPageActivity::class.java)
+                        intent.putExtra("from", "homePage")
+                        startActivity(intent)
+                    true
+                    }
+                    R.id.activity_home_page_addBarcode -> {
+                        val intent = Intent(this, AddBarcodeActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
+                    R.id.activity_home_page_exit ->
+                        Toast.makeText(this@ImpairedUserActivity, "You Clicked : " + item.title, Toast.LENGTH_SHORT).show()
+                }
+                true
+            })
+            popupMenu.inflate(R.menu.homepage_popup_menu)
+            try {
+                val fieldPopup = PopupMenu::class.java.getDeclaredField("mPopup")
+                fieldPopup.isAccessible = true
+                val mPopup = fieldPopup.get(popupMenu)
+                mPopup.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                    .invoke(mPopup,true)
+            }catch (e: Exception){
+                Log.d("myPopup", e.localizedMessage)
+            }finally {
+                popupMenu.show()
+            }
+            /*val intent = Intent(this, IntroPageActivity::class.java)
             intent.putExtra("from", "homePage")
-            startActivity(intent)
+            startActivity(intent)*/
         }
 
-        activity_home_page_addBarcode.setOnClickListener {
+        /*activity_home_page_addBarcode.setOnClickListener {
             val intent = Intent(this, AddBarcodeActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
         activity_home_page_myTap.setOnClickListener(object : ClickListener() {
             override fun onSingleClick(v: View?) {

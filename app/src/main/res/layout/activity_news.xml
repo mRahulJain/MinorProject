@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center">
     <FrameLayout
@@ -43,14 +43,30 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="#f5a382"
-            android:layout_marginTop="20dp"
-            android:text="NEWS HEADLINES" />
+            app:cardElevation="15dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:layout_gravity="left"
+                android:id="@+id/activity_news"
+                android:textStyle="bold"
+                android:textColor="#f5a382"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="60dp"
+                android:text="NEWS HEADLINES" />
+        </androidx.cardview.widget.CardView>
+        <!--<View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:elevation="25dp"
+            android:background="@android:color/black"
+            android:alpha="0.6"/>-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_news_recyclerView"
             android:layout_width="match_parent"

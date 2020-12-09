@@ -5,21 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <ImageButton
-        android:id="@+id/activity_home_page_infoBtn"
+        android:id="@+id/activity_home_page_popupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:padding="3dp"
         android:background="@drawable/tap_btn_layer1"
-        android:src="@drawable/ic_info" />
-    <Button
-        android:text="Add\nBarcode"
-        android:textAllCaps="false"
-        android:layout_gravity="right"
-        android:id="@+id/activity_home_page_addBarcode"
-        android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:src="@drawable/ic_menu_icon" />
+
     <LinearLayout
         android:layout_marginTop="80dp"
         android:layout_marginBottom="80dp"

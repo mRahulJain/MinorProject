@@ -30,7 +30,7 @@ class TextRecognitionTextActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             activity_text_recognition_text_textView.text = string
-            val scannedText = "The scanned document says \n\n\n\n\n$string"
+            val scannedText = "The scanned document says \n\n\n\n\n$string\n That's all! \n\n Swipe right to return to the main screen"
             Constants().speak(waitingText+scannedText, mTextToSpeechHelper)
         }, 1000)
 
@@ -41,7 +41,6 @@ class TextRecognitionTextActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-
             override fun onSwipeLeft() {
             }
 
