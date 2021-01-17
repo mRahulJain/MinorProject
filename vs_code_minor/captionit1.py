@@ -10,7 +10,7 @@ from PIL import Image
 import warnings
 warnings.filterwarnings("ignore")
 
-model=load_model('./model_9.h5')
+model=load_model('./model_19.h5')
 
 
 model_temp=ResNet50(weights='imagenet',input_shape=(224,224,3))

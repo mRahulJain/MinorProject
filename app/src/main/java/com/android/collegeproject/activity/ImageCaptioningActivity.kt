@@ -78,15 +78,23 @@ class ImageCaptioningActivity : AppCompatActivity() {
 
         activity_image_captioning_textureView.surfaceTextureListener = listener
 
+        Handler().postDelayed({
+            toCall()
+        }, 1000)
+
         activity_image_captioning_button.setOnClickListener {
-            takePicture()
-            Handler().postDelayed({
-                getDescription()
-            },500)
+            toCall()
         }
     }
 
-    fun getDescription(){
+    fun toCall() {
+        takePicture()
+        Handler().postDelayed({
+            getDescription()
+        },1000)
+    }
+
+    fun getDescription() {
         val body = PostBody(BASE64_STRING)
         val imageCaptioningService = retrofit.create(ApiImageCaptioning::class.java)
         imageCaptioningService.getDescription(body).enqueue(object :
@@ -105,7 +113,8 @@ class ImageCaptioningActivity : AppCompatActivity() {
                         Constants().speak(
                             description!!.description, mTextToSpeechHelper
                         )
-                    },500)
+                    },100)
+                    activity_image_captioning_textView.text = description!!.description
                 } else {
                     Log.d(
                         "myBYTE",

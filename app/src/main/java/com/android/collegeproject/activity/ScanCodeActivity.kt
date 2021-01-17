@@ -98,7 +98,7 @@ class ScanCodeActivity : AppCompatActivity(), ZXingScannerView.ResultHandler  {
                     mScannerView.setResultHandler(this@ScanCodeActivity)
                     mScannerView.startCamera()
                 } else {
-                    Log.d("myBarcode", response.message())
+                    Log.d("myBarcode E", response.message())
                 }
             }
 
