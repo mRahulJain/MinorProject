@@ -34,7 +34,9 @@ class SplashActivity : AppCompatActivity() {
             if(mAndroidPermissions.checkPermissionForLocation()
                 && mAndroidPermissions.checkPermissionForMicrophone()
                 && mAndroidPermissions.checkPermissionForCamera()
-                && mAndroidPermissions.checkLocationSetting()) {
+                && mAndroidPermissions.checkLocationSetting()
+                && mAndroidPermissions.checkPermissionForContacts()
+                && mAndroidPermissions.checkPermissionForCallPhone()) {
                 val intent = Intent(this, ImpairedUserActivity::class.java)
                 startActivity(intent)
                 finish()

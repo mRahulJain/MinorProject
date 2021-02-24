@@ -59,6 +59,26 @@ class AndroidPermissions {
         }
         return true
     }
+    fun checkPermissionForContacts(): Boolean {
+        val result = ContextCompat.checkSelfPermission(
+            mActivity,
+            Manifest.permission.READ_CONTACTS
+        )
+        if(result ==  PackageManager.PERMISSION_GRANTED) {
+            return true
+        }
+        return false
+    }
+    fun checkPermissionForCallPhone(): Boolean {
+        val result = ContextCompat.checkSelfPermission(
+            mActivity,
+            Manifest.permission.CALL_PHONE
+        )
+        if(result ==  PackageManager.PERMISSION_GRANTED) {
+            return true
+        }
+        return false
+    }
 
     //checks whether the user's location is ON or OFF
     //if OFF it turns it ON

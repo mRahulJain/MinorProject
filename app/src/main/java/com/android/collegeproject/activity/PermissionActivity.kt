@@ -30,7 +30,9 @@ class PermissionActivity : AppCompatActivity() {
             if(mAndroidPermissions.checkPermissionForLocation()
                 && mAndroidPermissions.checkPermissionForMicrophone()
                 && mAndroidPermissions.checkPermissionForCamera()
-                && mAndroidPermissions.checkLocationSetting()) {
+                && mAndroidPermissions.checkLocationSetting()
+                && mAndroidPermissions.checkPermissionForContacts()
+                && mAndroidPermissions.checkPermissionForCallPhone()) {
                 val intent = Intent(this, ImpairedUserActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -47,7 +49,9 @@ class PermissionActivity : AppCompatActivity() {
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.CALL_PHONE
         )
 
         ActivityCompat.requestPermissions(

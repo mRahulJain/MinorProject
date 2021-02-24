@@ -1,19 +1,20 @@
 package com.android.collegeproject.activity
+import android.R.id.message
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.speech.RecognizerIntent
 import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.collegeproject.R
 import com.android.collegeproject.helper.*
 import kotlinx.android.synthetic.main.activity_home_page.*
 import java.util.*
+
 
 class ImpairedUserActivity : AppCompatActivity() {
 
@@ -33,7 +34,7 @@ class ImpairedUserActivity : AppCompatActivity() {
         }, 500)
 
         activity_home_page_popupBtn.setOnClickListener {
-            val popupMenu: PopupMenu = PopupMenu(this,activity_home_page_popupBtn)
+            val popupMenu: PopupMenu = PopupMenu(this, activity_home_page_popupBtn)
             popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.activity_home_page_help -> {
@@ -60,21 +61,13 @@ class ImpairedUserActivity : AppCompatActivity() {
                 fieldPopup.isAccessible = true
                 val mPopup = fieldPopup.get(popupMenu)
                 mPopup.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
-                    .invoke(mPopup,true)
+                    .invoke(mPopup, true)
             }catch (e: Exception){
                 Log.d("myPopup", e.localizedMessage)
             }finally {
                 popupMenu.show()
             }
-            /*val intent = Intent(this, IntroPageActivity::class.java)
-            intent.putExtra("from", "homePage")
-            startActivity(intent)*/
         }
-
-        /*activity_home_page_addBarcode.setOnClickListener {
-            val intent = Intent(this, AddBarcodeActivity::class.java)
-            startActivity(intent)
-        }*/
 
         activity_home_page_myTap.setOnClickListener(object : ClickListener() {
             override fun onSingleClick(v: View?) {
@@ -82,7 +75,7 @@ class ImpairedUserActivity : AppCompatActivity() {
             }
 
             override fun onDoubleClick(v: View?) {
-                if(!mAndroidPermission.checkPermissionForMicrophone()) {
+                if (!mAndroidPermission.checkPermissionForMicrophone()) {
                     //don't perform anything if permission is denied
                 } else {
                     mTextToSpeechHelper.destroySpeech()
@@ -176,7 +169,10 @@ class ImpairedUserActivity : AppCompatActivity() {
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
                     }
-                    val intent = Intent(this@ImpairedUserActivity, ImageCaptioningActivity::class.java)
+                    val intent = Intent(
+                        this@ImpairedUserActivity,
+                        ImageCaptioningActivity::class.java
+                    )
                     startActivity(intent)
                 }
                 data!![0].toString().toLowerCase(Locale.ROOT) == "help" -> {
@@ -202,7 +198,10 @@ class ImpairedUserActivity : AppCompatActivity() {
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
                     }
-                    val intent = Intent(this@ImpairedUserActivity, TextRecognitionActivity::class.java)
+                    val intent = Intent(
+                        this@ImpairedUserActivity,
+                        TextRecognitionActivity::class.java
+                    )
                     startActivity(intent)
                 }
                 data!![0].toString().toLowerCase(Locale.ROOT) == "product" -> {
@@ -213,6 +212,17 @@ class ImpairedUserActivity : AppCompatActivity() {
                     val intent = Intent(this@ImpairedUserActivity, ScanCodeActivity::class.java)
                     intent.putExtra("purpose", "scan")
                     startActivity(intent)
+                }
+                data!![0].toString().toLowerCase(Locale.ROOT).substring(0, 4) == "call" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    CallHelper(
+                        this@ImpairedUserActivity,
+                        Constants().capitalizeFirstCharacter(data!![0].toString().substring(5, data!![0].length))
+                    )
+                        .callMethod()
                 }
                 else -> {
                     Constants().speak("Sorry couldn't hear you!", mTextToSpeechHelper)
@@ -228,4 +238,6 @@ class ImpairedUserActivity : AppCompatActivity() {
             Log.d(s, "onEvent $eventType")
         }
     }
+
+
 }
