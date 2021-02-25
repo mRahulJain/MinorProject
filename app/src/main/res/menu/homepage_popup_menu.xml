@@ -7,6 +7,9 @@
     <item android:id="@+id/activity_home_page_addBarcode"
         android:icon="@drawable/ic_gift"
         android:title=" Add Product" />
+    <item android:id="@+id/activity_add_emergency"
+        android:icon="@drawable/ic_logout"
+        android:title=" Add Emergency" />
     <item android:id="@+id/activity_home_page_exit"
         android:icon="@drawable/ic_logout"
         android:title=" Exit" />

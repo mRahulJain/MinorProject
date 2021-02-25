@@ -1,5 +1,4 @@
 package com.android.collegeproject.activity
-import android.R.id.message
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -14,13 +13,14 @@ import com.android.collegeproject.R
 import com.android.collegeproject.helper.*
 import kotlinx.android.synthetic.main.activity_home_page.*
 import java.util.*
-
+import kotlin.collections.ArrayList
 
 class ImpairedUserActivity : AppCompatActivity() {
 
     private lateinit var mTextToSpeechHelper: TextToSpeechHelper
     private lateinit var mAndroidPermission: AndroidPermissions
     private lateinit var sr: SpeechRecognizer
+    private lateinit var mDialog: AddEmergencyActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,11 @@ class ImpairedUserActivity : AppCompatActivity() {
                     }
                     R.id.activity_home_page_addBarcode -> {
                         val intent = Intent(this, AddBarcodeActivity::class.java)
+                        startActivity(intent)
+                        true
+                    }
+                    R.id.activity_add_emergency -> {
+                        val intent = Intent(this, AddEmergencyActivity::class.java)
                         startActivity(intent)
                         true
                     }
@@ -218,11 +223,46 @@ class ImpairedUserActivity : AppCompatActivity() {
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
                     }
-                    CallHelper(
-                        this@ImpairedUserActivity,
-                        Constants().capitalizeFirstCharacter(data!![0].toString().substring(5, data!![0].length))
+                    CallSMSHelper(
+                        this@ImpairedUserActivity
                     )
-                        .callMethod()
+                        .callMethod(data!![0].toString().substring(5, data!![0].length))
+                }
+                data!![0].toString().toLowerCase(Locale.ROOT).substring(0, 3) == "sms" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    val list = getMessageAndNameArray(data!![0].toString())
+                    Log.d("mHEAR", "list : $list")
+                    when {
+                        list[0] == "NO CONTACT" -> {
+                            Handler().postDelayed({
+                                mTextToSpeechHelper.speakEnglish("Please mention contact name")
+                            },100)
+                        }
+                        list[1] == "NO MESSAGE" -> {
+                            Handler().postDelayed({
+                                mTextToSpeechHelper.speakEnglish("Please mention a message")
+                            },100)
+                        }
+                        else -> {
+                            CallSMSHelper(
+                                this@ImpairedUserActivity
+                            )
+                                .smsMethod(list[0].trim(), list[1].trim())
+                        }
+                    }
+                }
+                data!![0].toString().toLowerCase(Locale.ROOT) == "emergency" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    CallSMSHelper(
+                        this@ImpairedUserActivity
+                    )
+                        .emergency()
                 }
                 else -> {
                     Constants().speak("Sorry couldn't hear you!", mTextToSpeechHelper)
@@ -237,7 +277,40 @@ class ImpairedUserActivity : AppCompatActivity() {
         override fun onEvent(eventType: Int, params: Bundle?) {
             Log.d(s, "onEvent $eventType")
         }
+
+        private fun getMessageAndNameArray(text: String) : ArrayList<String> {
+            val list = arrayListOf<String>()
+
+            val array = text.split(" ")
+            val toIndex = getToIndex(array)
+            var contact = ""
+            if(toIndex == -1 || toIndex == array.size-1) {
+                list.add("NO CONTACT")
+            } else {
+                for(i in toIndex+1 until array.size) {
+                    contact += array[i] + " "
+                }
+                list.add(contact)
+            }
+
+            var message = ""
+            for(i in 1 until toIndex) {
+                message += array[i] + " "
+            }
+            if(message == "") {
+                message = "NO MESSAGE"
+            }
+            list.add(message)
+            return list
+        }
+
+        private fun getToIndex(array: List<String>) : Int {
+            for(i in array.size-1 downTo 0) {
+                if(array[i].toLowerCase(Locale.ROOT) == "to") {
+                    return i
+                }
+            }
+            return -1
+        }
     }
-
-
 }

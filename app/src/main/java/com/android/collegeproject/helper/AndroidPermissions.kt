@@ -79,6 +79,16 @@ class AndroidPermissions {
         }
         return false
     }
+    fun checkPermissionForSendSMS(): Boolean {
+        val result = ContextCompat.checkSelfPermission(
+            mActivity,
+            Manifest.permission.SEND_SMS
+        )
+        if(result ==  PackageManager.PERMISSION_GRANTED) {
+            return true
+        }
+        return false
+    }
 
     //checks whether the user's location is ON or OFF
     //if OFF it turns it ON
