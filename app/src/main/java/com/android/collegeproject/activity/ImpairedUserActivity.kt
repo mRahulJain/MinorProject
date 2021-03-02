@@ -152,8 +152,23 @@ class ImpairedUserActivity : AppCompatActivity() {
         override fun onResults(results: Bundle?) {
             val data = results!!
                 .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-            when {
-                data!![0].toString().toLowerCase(Locale.ROOT) == "weather" -> {
+            val dataSaid = data!![0].toString().toLowerCase(Locale.ROOT)
+
+            //rest features
+            when (dataSaid) {
+                "call" -> {
+                    Handler().postDelayed({
+                        mTextToSpeechHelper.speakEnglish("Please mention contact name")
+                    },100)
+                    return
+                }
+                "sms" -> {
+                    Handler().postDelayed({
+                        mTextToSpeechHelper.speakEnglish("Please mention contact name and message")
+                    },100)
+                    return
+                }
+                "weather" -> {
                     mTextToSpeechHelper.destroySpeech()
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
@@ -161,7 +176,7 @@ class ImpairedUserActivity : AppCompatActivity() {
                     val intent = Intent(this@ImpairedUserActivity, WeatherActivity::class.java)
                     startActivity(intent)
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT) == "news" -> {
+                "news" -> {
                     mTextToSpeechHelper.destroySpeech()
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
@@ -169,7 +184,7 @@ class ImpairedUserActivity : AppCompatActivity() {
                     val intent = Intent(this@ImpairedUserActivity, NewsActivity::class.java)
                     startActivity(intent)
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT) == "detect" -> {
+                "detect" -> {
                     mTextToSpeechHelper.destroySpeech()
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
@@ -180,14 +195,14 @@ class ImpairedUserActivity : AppCompatActivity() {
                     )
                     startActivity(intent)
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT) == "help" -> {
+                "help" -> {
                     mTextToSpeechHelper.destroySpeech()
                     val helpText = "Welcome to Hear Us! We are here to help you in performing your day-to-day activities more independently. \n\n" +
                             "By using this application you can Identify the objects by clicking a picture and hear the app speak the identification back to you. Hear Us is an accessible reading tool with an advanced text-to-speech feature. It describes the environment by giving you updates on the weather and the latest news. This app helps you to identify details of various products by scanning their barcode, in shopping marts or anywhere you go. It's very simple and easy to use! \n\n"+
                             "To know how to access these features, kindly double tap and speak keywords"
                     Constants().speak(helpText, mTextToSpeechHelper)
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT) == "keywords" -> {
+                "keywords" -> {
                     mTextToSpeechHelper.destroySpeech()
                     val keywordText = "hey! now i will tell you the keywords to proceed on our application \n\n\n\n"+"To identify objects by clicking a picture use keyword - DETECT\n\n"+
                             "To scan various products and view its details use keyword - PRODUCT\n\n"+
@@ -198,7 +213,7 @@ class ImpairedUserActivity : AppCompatActivity() {
                             "\n\n Throughout the app swipe right to go back from any screen"
                     Constants().speak(keywordText, mTextToSpeechHelper)
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT) == "read" -> {
+                "read" -> {
                     mTextToSpeechHelper.destroySpeech()
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
@@ -209,7 +224,7 @@ class ImpairedUserActivity : AppCompatActivity() {
                     )
                     startActivity(intent)
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT) == "product" -> {
+                "product" -> {
                     mTextToSpeechHelper.destroySpeech()
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
@@ -218,7 +233,24 @@ class ImpairedUserActivity : AppCompatActivity() {
                     intent.putExtra("purpose", "scan")
                     startActivity(intent)
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT).substring(0, 4) == "call" -> {
+                "emergency" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    CallSMSHelper(
+                        this@ImpairedUserActivity
+                    )
+                        .emergency()
+                }
+                else -> {
+                    Constants().speak("Sorry couldn't hear you!", mTextToSpeechHelper)
+                }
+            }
+
+            //for call
+            if(dataSaid.length > 3) {
+                if(dataSaid.substring(0,4) == "call") {
                     mTextToSpeechHelper.destroySpeech()
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
@@ -228,7 +260,11 @@ class ImpairedUserActivity : AppCompatActivity() {
                     )
                         .callMethod(data!![0].toString().substring(5, data!![0].length))
                 }
-                data!![0].toString().toLowerCase(Locale.ROOT).substring(0, 3) == "sms" -> {
+            }
+
+            //for sms
+            if(dataSaid.length > 2) {
+                if(dataSaid.substring(0,3) == "sms") {
                     mTextToSpeechHelper.destroySpeech()
                     if(this@ImpairedUserActivity::sr.isInitialized) {
                         sr.destroy()
@@ -253,19 +289,6 @@ class ImpairedUserActivity : AppCompatActivity() {
                                 .smsMethod(list[0].trim(), list[1].trim())
                         }
                     }
-                }
-                data!![0].toString().toLowerCase(Locale.ROOT) == "emergency" -> {
-                    mTextToSpeechHelper.destroySpeech()
-                    if(this@ImpairedUserActivity::sr.isInitialized) {
-                        sr.destroy()
-                    }
-                    CallSMSHelper(
-                        this@ImpairedUserActivity
-                    )
-                        .emergency()
-                }
-                else -> {
-                    Constants().speak("Sorry couldn't hear you!", mTextToSpeechHelper)
                 }
             }
         }

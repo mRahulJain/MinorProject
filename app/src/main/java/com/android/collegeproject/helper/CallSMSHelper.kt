@@ -57,7 +57,7 @@ class CallSMSHelper {
                     ContactsContract.CommonDataKinds.Phone.NUMBER,
                     ContactsContract.CommonDataKinds.Phone.TYPE
                 ),
-                "DISPLAY_NAME LIKE '%$name%'", null, null
+                "DISPLAY_NAME LIKE '$name'", null, null
             )
             if(cursor == null) {
                 return
@@ -94,7 +94,7 @@ class CallSMSHelper {
                     ContactsContract.CommonDataKinds.Phone.NUMBER,
                     ContactsContract.CommonDataKinds.Phone.TYPE
                 ),
-                "DISPLAY_NAME LIKE '%$name%'", null, null
+                "DISPLAY_NAME LIKE '$name'", null, null
             )
             if(cursor == null) {
                 return
@@ -125,7 +125,7 @@ class CallSMSHelper {
                     ContactsContract.CommonDataKinds.Phone.NUMBER,
                     ContactsContract.CommonDataKinds.Phone.TYPE
                 ),
-                "DISPLAY_NAME LIKE '%$name%'", null, null
+                "DISPLAY_NAME LIKE '$name'", null, null
             )
             if(cursor == null) {
                 return
@@ -161,6 +161,9 @@ class CallSMSHelper {
             for(i in nameList.indices) {
                 sendEmergencyMessage(nameList[i], "$address\nhttps://maps.google.com/?q=${location[0]},${location[1]}")
             }
+            android.os.Handler().postDelayed({
+                mTextToSpeechHelper.speakEnglish("Alert sent!")
+            }, 100)
         }, 500)
     }
 
