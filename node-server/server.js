@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 var mongoClient = mongodb.MongoClient;
 
 //CONNECTION URL
-var url = "mongodb://localhost:4090";
+var url = process.env.URL;
 
 mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
   if(err) {
@@ -84,7 +84,7 @@ mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
 
 
     //START WEB SERVER
-    var port = 4090;
+    var port = process.env.PORT || 4090;
     Promise.resolve(app.listen(port)).then(()=>{
       console.log("Connected to mongodb server, web server is running on port 4090");
     });
