@@ -22,7 +22,7 @@ class AddBarcodeActivity : AppCompatActivity() {
 
 
 
-    val IP_HOST = "http://${Constants().IP_HOST}:4090"
+    val IP_HOST = "https://ancient-earth-21550.herokuapp.com/"
     var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(IP_HOST)
         .addConverterFactory(GsonConverterFactory.create())
