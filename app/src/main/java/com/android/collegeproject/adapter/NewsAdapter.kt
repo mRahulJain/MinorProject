@@ -32,7 +32,7 @@ class NewsAdapter(val context: Context, val newsModelClass: NewsModelClass) :
         val base = newsModelClass.articles[position].urlToImage
         holder.itemView.activity_news_tile_headline.text = newsModelClass.articles[position].title
         holder.itemView.activity_news_tile_headline.isSelected = true
-        Picasso.with(context).load(base).into(holder.itemView.activity_news_img)
+        Picasso.get().load(base).into(holder.itemView.activity_news_img)
         holder.itemView.activity_news_tile_sources.text = newsModelClass.articles[position].source.name
         holder.itemView.activity_news_tile_main.setOnTouchListener(object : SwipeListener(context){
             override fun onSwipeBottom() {

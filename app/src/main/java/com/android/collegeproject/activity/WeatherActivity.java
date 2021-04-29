@@ -163,7 +163,7 @@ public class WeatherActivity extends AppCompatActivity {
         mLoader.setVisibility(View.GONE);
         mMainScreen.setVisibility(View.VISIBLE);
 
-        Picasso.with(this).load(base).into(mImageViewIcon);
+        Picasso.get().load(base).into(mImageViewIcon);
         mTextViewMaxTemp.setText(String.format("%.2f",mBody.getMain().getTemp_max())+" \u2103");
         mTextViewMinTemp.setText(String.format("%.2f",mBody.getMain().getTemp_min())+" \u2103");
         mTextViewNormalTemp.setText(String.format("%.2f",mBody.getMain().getTemp())+" \u2103");

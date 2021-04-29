@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 var mongoClient = mongodb.MongoClient;
 
 //CONNECTION URL
-var url = process.env.URL;
+var url = "mongodb+srv://cluster0.ahwt8.mongodb.net/myFirstDatabase";//"mongodb+srv://cluster0.ahwt8.mongodb.net/myFirstDatabase";
 
 mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
   if(err) {
@@ -73,8 +73,11 @@ mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
           response.json({'productBarcode': "-1"});
           console.log('No such product exists');
         } else {
+       console.log(number);
           db.collection('barcode').findOne({'productBarcode': productBarcode}, function(err,res){
+
             response.json(res);
+            console.log(err+", "+res);
             console.log('Success in getting product');
           })
         }
@@ -84,7 +87,7 @@ mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
 
 
     //START WEB SERVER
-    var port = process.env.PORT || 4090;
+    var port =  process.env.PORT || 4090;
     Promise.resolve(app.listen(port)).then(()=>{
       console.log("Connected to mongodb server, web server is running on port 4090");
     });

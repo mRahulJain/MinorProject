@@ -19,10 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class AddBarcodeActivity : AppCompatActivity() {
-
-
-
-    val IP_HOST = "https://ancient-earth-21550.herokuapp.com/"
+    val IP_HOST = "https://product-recog-hearus-123.herokuapp.com"
     var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(IP_HOST)
         .addConverterFactory(GsonConverterFactory.create())

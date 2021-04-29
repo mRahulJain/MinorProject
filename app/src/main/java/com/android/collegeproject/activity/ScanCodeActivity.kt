@@ -24,7 +24,7 @@ class ScanCodeActivity : AppCompatActivity(), ZXingScannerView.ResultHandler  {
     private lateinit var mAndroidPermissions: AndroidPermissions
     private lateinit var mPurpose: String
     private lateinit var mTextToSpeechHelper: TextToSpeechHelper
-    val IP_HOST = "https://ancient-earth-21550.herokuapp.com/"
+    val IP_HOST = "https://product-recog-hearus-123.herokuapp.com"
     var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(IP_HOST)
         .addConverterFactory(GsonConverterFactory.create())
@@ -33,12 +33,11 @@ class ScanCodeActivity : AppCompatActivity(), ZXingScannerView.ResultHandler  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mScannerView = ZXingScannerView(this)
-
         mPurpose = intent.getStringExtra("purpose")
         mTextToSpeechHelper = TextToSpeechHelper(this)
-
         mAndroidPermissions = AndroidPermissions(this)
 
+        Log.d("scan code", "Entered to scan code activity")
         if(!mAndroidPermissions.checkPermissionForCamera()) {
             //don't perform anything if permission is denied
         } else {
@@ -86,10 +85,14 @@ class ScanCodeActivity : AppCompatActivity(), ZXingScannerView.ResultHandler  {
     }
 
     private fun getProductDetailsIfExists(mBarcode: String) {
+
         val getProductService = retrofit.create(ApiBarcode::class.java)
+        Log.d("scan code", "before retrofit call ${mBarcode}, ")
         getProductService.getProduct(mBarcode).enqueue(object : Callback<Product> {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
+                Log.d("scan code", "inside onResponse function")
                 if(response.isSuccessful) {
+                    Log.d("barcode response", "success!!!!!!!!!!!!!!")
                     if(response.body()!!.productBarcode != "-1") {
                         Constants().speak(response.body()!!.productName, mTextToSpeechHelper)
                     } else {
@@ -101,7 +104,6 @@ class ScanCodeActivity : AppCompatActivity(), ZXingScannerView.ResultHandler  {
                     Log.d("myBarcode E", response.message())
                 }
             }
-
             override fun onFailure(call: Call<Product>, t: Throwable) {
                 Log.d("myBarcode", t.localizedMessage)
             }
