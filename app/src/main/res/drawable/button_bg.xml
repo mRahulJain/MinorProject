@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="0dp"
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="10dp"/>
+    <gradient
+        android:startColor="#ffeba370"
+        android:endColor="#ffee8970" />
+</shape>
+<!--background-image: linear-gradient(to right, #eba370, #ed966f, #ee8970, #ee7c74, #eb707a);-->

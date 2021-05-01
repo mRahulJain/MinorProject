@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="horizontal">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,6 +83,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_contact_book" />
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="wrap_content" />
@@ -99,6 +102,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_call"
+                android:layout_marginHorizontal="10dp"/>
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="wrap_content" />
@@ -114,6 +122,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sms"
+                android:layout_marginHorizontal="10dp"/>
             <TextView
                 android:layout_width="10dp"
                 android:layout_height="wrap_content" />

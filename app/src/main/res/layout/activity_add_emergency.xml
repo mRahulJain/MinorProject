@@ -1,21 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#ececec"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="0dp"
+        android:layout_alignParentTop="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:elevation="5dp"
+            android:background="@drawable/gradient_bg"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/gradientbg_text"
+                android:textColor="@android:color/white"
+                android:text="Emergency Contacts" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:padding="10dp"
+                android:background="@drawable/gradient_bg">
+                <TextView
+                    android:textStyle="bold"
+                    android:text="Add your emergency contacts here.."
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </FrameLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:layout_gravity="center"
-        android:textStyle="bold"
-        android:text="Add your emergency contacts here.."
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:textColor="#000000"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
+        android:layout_marginHorizontal="10dp"
+        android:theme="@style/Theme.MaterialComponents"
+        android:id="@+id/activity_add_barcode_chipGroup"
+        app:singleSelection="true"
+        android:foregroundGravity="center"
+        app:singleLine="false"
+        app:chipSpacing="5dp">
+
+        <!--
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="You contact names appear here"
+                    android:textColorHint="#808080" />
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Group" />
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="with" />-->
+    </com.google.android.material.chip.ChipGroup>
+
+    <!--<TextView
         android:id="@+id/activity_add_emergency_displayText"
         android:layout_margin="10dp"
         android:padding="10dp"
@@ -23,15 +88,17 @@
         android:textColorHint="#808080"
         android:layout_width="350dp"
         android:layout_gravity="center"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/>-->
     <Button
-        android:id="@+id/activity_add_emergency_addContact"
-        android:layout_marginTop="10dp"
-        android:text="ADD"
-        android:layout_marginBottom="10dp"
-        android:background="@android:color/transparent"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MaterialComponents"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/gradientbg_text"
+        android:id="@+id/activity_add_emergency_addContact"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:text="ADD"
+        tools:ignore="RtlCompat" />
 </LinearLayout>

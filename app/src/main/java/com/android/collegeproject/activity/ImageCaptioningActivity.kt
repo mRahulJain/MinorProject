@@ -346,6 +346,7 @@ class ImageCaptioningActivity : AppCompatActivity() {
 
     override fun onPause() {
         try {
+            mTextToSpeechHelper.destroySpeech()
             stopBackgroundThread()
         } catch (e: InterruptedException) {
             Log.e("myError", e.localizedMessage)
@@ -355,8 +356,14 @@ class ImageCaptioningActivity : AppCompatActivity() {
 
     @Throws(InterruptedException::class)
     private fun stopBackgroundThread() {
+        mTextToSpeechHelper.destroySpeech()
         backgroundThread.quitSafely()
         backgroundThread.join()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mTextToSpeechHelper.destroySpeech()
     }
 
 }

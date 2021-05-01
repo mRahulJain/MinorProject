@@ -50,7 +50,7 @@ class IntroPageActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 if(from == "splash") {
-                    if(position == 6) {
+                    if(position == 7) {
                         activity_intro_page_nextTutorialBtn.text = "FINISH"
                     } else {
                         activity_intro_page_nextTutorialBtn.text = "SKIP"
@@ -83,7 +83,7 @@ class IntroPageActivity : AppCompatActivity() {
         }
 
         override fun getCount(): Int {
-            return 7
+            return 8
         }
 
         override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
@@ -125,6 +125,11 @@ class IntroPageActivity : AppCompatActivity() {
                     view!!.intro_slider_pageHeading.text = "Text Recognition"
                     view!!.intro_slider_pageImage.setImageResource(R.drawable.img_text_recognition)
                     view!!.intro_slider_pageDescription.text = "Accessible reading tool with an advanced text-to-speech feature. Experience perfectly synchronized text & audio."
+                }
+                6 -> {
+                    view!!.intro_slider_pageHeading.text = "SOS Services"
+                    view!!.intro_slider_pageImage.setImageResource(R.drawable.img_sos_services)
+                    view!!.intro_slider_pageDescription.text = "Call, send sms to your contacts or send location notification to emergency contacts."
                 }
                 else -> {
                     view!!.intro_slider_pageHeading.text = "Keywords"
