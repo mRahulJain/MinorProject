@@ -61,41 +61,22 @@
         android:foregroundGravity="center"
         app:singleLine="false"
         app:chipSpacing="5dp">
-
-        <!--
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="You contact names appear here"
-                    android:textColorHint="#808080" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Group" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="with" />-->
     </com.google.android.material.chip.ChipGroup>
-
-    <!--<TextView
-        android:id="@+id/activity_add_emergency_displayText"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:hint="You contact names appear here"
-        android:textColorHint="#808080"
-        android:layout_width="350dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"/>-->
     <Button
-        android:layout_width="wrap_content"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/tap_btn_layer1"
+        android:elevation="0dp"
+        android:textColor="@android:color/white"
+        android:layout_marginHorizontal="100dp"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.MaterialComponents"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:background="@drawable/gradientbg_text"
         android:id="@+id/activity_add_emergency_addContact"
         android:padding="10dp"
         android:textAlignment="center"

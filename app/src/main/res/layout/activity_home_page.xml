@@ -51,8 +51,9 @@
             android:id="@+id/activity_home_page_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:textSize="28sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:textSize="25sp"
             android:textColor="@android:color/black"
             android:text="Double Tap and Speak" />
     </LinearLayout>
