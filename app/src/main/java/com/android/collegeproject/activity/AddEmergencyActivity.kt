@@ -11,6 +11,7 @@ import android.provider.ContactsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
 import androidx.loader.content.CursorLoader
@@ -81,13 +82,17 @@ class AddEmergencyActivity() : AppCompatActivity() {
                 null, null, null)
             if (cursor != null && cursor.moveToFirst()) {
                 var names = sharedPreferences.getString(Constants().EMERGENCY_NAMES, "")
+                val contactNames : List<String> = names!!.split(",")
+                if(contactNames.contains(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)))) {
+                    Toast.makeText(this, "Contact Already Added", Toast.LENGTH_SHORT).show()
+                    return
+                }
                 names += if(names == "") {
                     "${cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))}"
                 } else {
                     ",${cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))}"
                 }
                 activity_add_barcode_chipGroup!!.removeAllViews()
-                val contactNames : List<String> = names!!.split(",")
                 for (index in contactNames) {
                     val chip = Chip(activity_add_barcode_chipGroup.context)
                     chip.text= "${index}"

@@ -20,7 +20,6 @@ class ImpairedUserActivity : AppCompatActivity() {
     private lateinit var mTextToSpeechHelper: TextToSpeechHelper
     private lateinit var mAndroidPermission: AndroidPermissions
     private lateinit var sr: SpeechRecognizer
-    private lateinit var mDialog: AddEmergencyActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,6 +119,13 @@ class ImpairedUserActivity : AppCompatActivity() {
         if(this::sr.isInitialized) {
             sr.destroy()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Handler().postDelayed({
+            Constants().speak("Double Tap and Speak", mTextToSpeechHelper)
+        }, 500)
     }
 
     inner class CustomRecognitionListener: RecognitionListener {
