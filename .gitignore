@@ -12,3 +12,4 @@
 /captures
 .externalNativeBuild
 .cxx
+/book_cab_prototype/node_modules
