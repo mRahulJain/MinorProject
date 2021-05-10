@@ -90,9 +90,7 @@ class ScanCodeActivity : AppCompatActivity(), ZXingScannerView.ResultHandler  {
         Log.d("scan code", "before retrofit call ${mBarcode}, ")
         getProductService.getProduct(mBarcode).enqueue(object : Callback<Product> {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
-                Log.d("scan code", "inside onResponse function")
-                if(response.isSuccessful) {
-                    Log.d("barcode response", "success!!!!!!!!!!!!!!")
+                 if(response.isSuccessful) {
                     if(response.body()!!.productBarcode != "-1") {
                         Constants().speak(response.body()!!.productName, mTextToSpeechHelper)
                     } else {
