@@ -82,7 +82,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:paddingHorizontal="20dp"
-                    android:layout_gravity="center"
+
                     android:layout_height="match_parent">
                     <TextView
                         android:id="@+id/activity_book_cab_vehicleName"
@@ -104,6 +104,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
+                        android:textStyle="italic"
                         android:layout_marginVertical="10dp"
                         android:text="Your driver is Arriving!"
                         android:layout_alignParentLeft="true"
@@ -122,7 +123,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        android:layout_marginTop="5dp"
+                        android:textStyle="italic"
+                        android:layout_marginTop="10dp"
                         android:text="Driver Contact :"
                         android:layout_below="@+id/activity_book_cab_vehicleNumber"
                         android:layout_alignParentLeft="true" />
@@ -131,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="35dp"
                         android:text="9560758959"
                         android:layout_below="@+id/activity_book_cab_vehicleNumber"
                         android:layout_alignParentLeft="true"
@@ -152,7 +154,35 @@
                         android:layout_alignParentRight="true"
                         android:layout_below="@+id/activity_book_cab_driverIcon"
                         android:id="@+id/activity_book_cab_driverName" />
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        android:layout_marginVertical="10dp"
+                        android:text="Estimated Time"
+                        android:layout_below="@+id/activity_book_cab_contact"
+                        android:layout_alignParentLeft="true" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:layout_marginTop="35dp"
+                        android:text="40 mins "
+                        android:layout_below="@+id/activity_book_cab_contact"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/activity_book_cab_estTime" />
+                    <Button
+                        android:id="@+id/activity_book_cab_fare"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/activity_book_cab_estTime"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/tap_btn_layer1"
+                        android:elevation="0dp"
+                        android:text="Rs. 150"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>

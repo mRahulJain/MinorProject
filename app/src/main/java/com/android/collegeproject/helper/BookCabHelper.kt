@@ -3,7 +3,7 @@ package com.android.collegeproject.helper
 import android.location.Geocoder
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.common.math.DoubleMath.roundToLong
+import kotlin.math.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -42,18 +42,26 @@ class BookCabHelper{
         return location
     }
 
-    fun calculateFare(distanceInMeters : Double, timeInHrs : Double) : Long {
+    fun calculateFare(distanceInKiloMeters : Double, timeInHrs : Double) : Long {
         val baseFare = 0.4
         val timeRate = 0.14
         val distanceRate = 0.97
         val surge = 2.0
-        val distanceInKm : Double = distanceInMeters * 0.001
         val timeInMins : Double = timeInHrs * 0.0166667
         val pricePerMin : Double = timeRate * timeInMins
-        val pricePerKm  : Double = distanceRate * distanceInKm
+        val pricePerKm  : Double = distanceRate * distanceInKiloMeters
 
         val totalFare : Double = (baseFare + pricePerKm + pricePerMin) * surge
         return Math.round(totalFare)
     }
+    fun calculateDistanceInKm(lat1: Double, lon1: Double,lat2: Double, lon2: Double) : Double{
+        return acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1)) *6371.8
+    }
+    fun clacTimeInHrs(distInKm: Double?): Double{
+        val rand:kotlin.random.Random = kotlin.random.Random(System.nanoTime())
+        val speed:Double = (40..60).random(rand).toDouble()
+        return distInKm!!.div(speed)
+    }
 
 }
+
