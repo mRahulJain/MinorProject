@@ -249,6 +249,14 @@ class ImpairedUserActivity : AppCompatActivity() {
                     )
                         .emergency()
                 }
+                "cab" -> {
+                    mTextToSpeechHelper.destroySpeech()
+                    if(this@ImpairedUserActivity::sr.isInitialized) {
+                        sr.destroy()
+                    }
+                    val intent = Intent(this@ImpairedUserActivity, BookCabActivity::class.java)
+                    startActivity(intent)
+                }
                 else -> {
                     Constants().speak("Sorry couldn't hear you!", mTextToSpeechHelper)
                 }

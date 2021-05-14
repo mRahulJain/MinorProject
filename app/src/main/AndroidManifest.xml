@@ -46,6 +46,9 @@
             android:name=".activity.WeatherActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activity.BookCabActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.NewsActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.ScanCodeActivity"

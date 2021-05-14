@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.BookCabActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+        android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="20dp"
+                app:cardCornerRadius="40dp"
+                android:padding="0dp"
+                android:layout_weight="1"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="From : "
+                        android:textSize="15sp"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:layout_weight="4"
+                        android:id="@+id/activity_book_cab_from" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginVertical="5dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="To : "
+                        android:textSize="15sp"
+                        android:layout_weight="1"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:layout_weight="4"
+                        android:id="@+id/activity_book_cab_to" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="12dp"
+                android:layout_weight="2"
+                app:cardElevation="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:paddingHorizontal="20dp"
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/activity_book_cab_vehicleName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Ford Figo"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/activity_book_cab_vehicleName"
+                        android:background="@android:color/black"
+                        android:layout_marginTop="3dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_marginVertical="10dp"
+                        android:text="Your driver is Arriving!"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/activity_book_cab_vehicleName"
+                        android:id="@+id/activity_book_cab_status" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_marginTop="10dp"
+                        android:text="DL7CN5546"
+                        android:layout_below="@+id/activity_book_cab_status"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/activity_book_cab_vehicleNumber" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_marginTop="5dp"
+                        android:text="Driver Contact :"
+                        android:layout_below="@+id/activity_book_cab_vehicleNumber"
+                        android:layout_alignParentLeft="true" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="25dp"
+                        android:text="9560758959"
+                        android:layout_below="@+id/activity_book_cab_vehicleNumber"
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/activity_book_cab_contact" />
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_driver"
+                        android:id="@+id/activity_book_cab_driverIcon"
+                        android:layout_below="@+id/activity_book_cab_status"
+                        android:layout_alignParentRight="true"
+                        tools:ignore="UnknownId" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:text="Rampal Singh"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/activity_book_cab_driverIcon"
+                        android:id="@+id/activity_book_cab_driverName" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_bg"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:text="Double tap and Speak" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -19,7 +19,6 @@ import java.io.IOException
 import java.lang.StringBuilder
 
 class TextRecognitionActivity : AppCompatActivity() {
-
     private lateinit var mCameraView : SurfaceView
     private lateinit var mCameraSource: CameraSource
     private lateinit var mAndroidPermissions: AndroidPermissions
@@ -29,7 +28,6 @@ class TextRecognitionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_text_recognition)
-
         mCameraView = findViewById(R.id.activity_text_recognition_surfaceView)
         mAndroidPermissions = AndroidPermissions(this)
         mTextToSpeechHelper = TextToSpeechHelper(this)
