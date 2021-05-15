@@ -162,6 +162,26 @@ class ImpairedUserActivity : AppCompatActivity() {
 
             //rest features
             when (dataSaid) {
+                "book", "book cab", "book cab to" -> {
+                    Handler().postDelayed({
+                        mTextToSpeechHelper.speakEnglish("Please mention destination")
+                    },100)
+                    return
+                }
+                "cab" -> {
+                    val sharedPreferences = this@ImpairedUserActivity.getSharedPreferences(
+                        Constants().CAB,
+                        MODE_PRIVATE
+                    )
+                    if(sharedPreferences.getString(Constants().CAB_ID, "") == "") {
+                        mTextToSpeechHelper.speakEnglish("No booking")
+                    } else {
+                        val intent = Intent(this@ImpairedUserActivity, BookCabActivity::class.java)
+                        intent.putExtra("type", "direct")
+                        startActivity(intent)
+                    }
+                    return
+                }
                 "call" -> {
                     Handler().postDelayed({
                         mTextToSpeechHelper.speakEnglish("Please mention contact name")
@@ -249,14 +269,6 @@ class ImpairedUserActivity : AppCompatActivity() {
                     )
                         .emergency()
                 }
-                "cab" -> {
-                    mTextToSpeechHelper.destroySpeech()
-                    if(this@ImpairedUserActivity::sr.isInitialized) {
-                        sr.destroy()
-                    }
-                    val intent = Intent(this@ImpairedUserActivity, BookCabActivity::class.java)
-                    startActivity(intent)
-                }
                 else -> {
                     Constants().speak("Sorry couldn't hear you!", mTextToSpeechHelper)
                 }
@@ -264,15 +276,46 @@ class ImpairedUserActivity : AppCompatActivity() {
 
             //for call
             if(dataSaid.length > 3) {
-                if(dataSaid.substring(0,4) == "call") {
-                    mTextToSpeechHelper.destroySpeech()
-                    if(this@ImpairedUserActivity::sr.isInitialized) {
-                        sr.destroy()
+                when (dataSaid.substring(0,4)) {
+                    "call" -> {
+                        mTextToSpeechHelper.destroySpeech()
+                        if(this@ImpairedUserActivity::sr.isInitialized) {
+                            sr.destroy()
+                        }
+                        CallSMSHelper(
+                            this@ImpairedUserActivity
+                        )
+                            .callMethod(data!![0].toString().substring(5, data!![0].length))
                     }
-                    CallSMSHelper(
-                        this@ImpairedUserActivity
-                    )
-                        .callMethod(data!![0].toString().substring(5, data!![0].length))
+                    "book" -> {
+                        val sharedPreferences = this@ImpairedUserActivity.getSharedPreferences(
+                            Constants().CAB,
+                            MODE_PRIVATE
+                        )
+                        if(sharedPreferences.getString(Constants().CAB_ID, "") == "") {
+                            val dataSaidArray = dataSaid.split(" ")
+                            if(dataSaidArray.size < 4) {
+                                return
+                            }
+                            mTextToSpeechHelper.destroySpeech()
+                            if(this@ImpairedUserActivity::sr.isInitialized) {
+                                sr.destroy()
+                            }
+                            var to = ""
+                            for(i in 3 .. dataSaidArray.lastIndex) {
+                                to += "${dataSaidArray[i]} "
+                            }
+                            val intent = Intent(this@ImpairedUserActivity, BookCabActivity::class.java)
+                            intent.putExtra("type", "booking")
+                            intent.putExtra("destination", to)
+                            startActivity(intent)
+                            return
+                        }
+
+                        mTextToSpeechHelper.speakEnglish("A ride is in progress")
+                        return
+
+                    }
                 }
             }
 

@@ -60,7 +60,7 @@ class BookCabHelper{
     fun clacTimeInHrs(distInKm: Double?): Double{
         val rand:kotlin.random.Random = kotlin.random.Random(System.nanoTime())
         val speed:Double = (40..60).random(rand).toDouble()
-        return distInKm!!.div(speed)
+        return Math.round(distInKm!!.div(speed) * 100.0) / 100.0
     }
 
 }

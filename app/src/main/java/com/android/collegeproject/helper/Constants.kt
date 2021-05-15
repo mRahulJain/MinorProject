@@ -7,6 +7,19 @@ class Constants {
     val EMERGENCY = "EMERGENCY"
     val EMERGENCY_NAMES = "EMERGENCY_NAMES"
 
+    val CAB = "CAB"
+    val CAB_ID = "CAB_ID"
+    val CAB_FROM = "CAB_FROM"
+    val CAB_TO = "CAB_TO"
+    val CAB_VEHICLE = "CAB_VEHICLE"
+    val CAB_DRIVER_NAME = "CAB_DRIVER_NAME"
+    val CAB_VEHICLE_NUMBER = "CAB_VEHICLE_NUMBER"
+    val CAB_VEHICLE_TYPE = "CAB_VEHICLE_TYPE"
+    val CAB_CONTACT_NUMBER = "CAB_CONTACT_NUMBER"
+    val CAB_FARE = "CAB_FARE"
+    val CAB_ESTIMATED_TIME = "CAB_ESTIMATED_TIME"
+
+
     fun speak(text: String, mTextToSpeechHelper: TextToSpeechHelper) {
         mTextToSpeechHelper.speakEnglish(text)
     }
