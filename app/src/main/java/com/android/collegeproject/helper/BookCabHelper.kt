@@ -22,10 +22,11 @@ class BookCabHelper{
                 longitude,
                 1
             )
-            address = addresses[0].getAddressLine(0)
+            address = addresses[0].locality+", "+addresses[0].featureName//
         } catch (e : Exception) {
             Log.e("PUI", "${e.printStackTrace()}")
         }
+        Log.d("mCabHelper",address)
         return address
     }
 
@@ -42,26 +43,34 @@ class BookCabHelper{
         return location
     }
 
-    fun calculateFare(distanceInKiloMeters : Double, timeInHrs : Double) : Long {
-        val baseFare = 0.4
-        val timeRate = 0.14
+    fun calculateFare(distanceInKiloMeters : Double, timeInHrs : Double) : Double {
+        val baseFare = 1.12
+        val timeRate = 0.95
         val distanceRate = 0.97
         val surge = 2.0
-        val timeInMins : Double = timeInHrs * 0.0166667
+        val timeInMins : Double = timeInHrs
         val pricePerMin : Double = timeRate * timeInMins
         val pricePerKm  : Double = distanceRate * distanceInKiloMeters
 
         val totalFare : Double = (baseFare + pricePerKm + pricePerMin) * surge
-        return Math.round(totalFare)
+        return round(totalFare)
     }
     fun calculateDistanceInKm(lat1: Double, lon1: Double,lat2: Double, lon2: Double) : Double{
-        return acos(sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(lon2 - lon1)) *6371.8
+        val R = 6371
+        val dlon = (lon2 - lon1)*PI/180
+        val dlat = (lat2 - lat1)*PI/180
+        val a = sin(dlat/2)*sin(dlat/2) + cos(lat1*PI/180)*cos(lat2*PI/180)*sin(dlon/2)*sin(dlon/2)
+        val c = 2 * asin(sqrt(a))
+
+        return R * c
     }
     fun clacTimeInHrs(distInKm: Double?): Double{
+        Log.d("mCabHelper dist",distInKm.toString())
         val rand:kotlin.random.Random = kotlin.random.Random(System.nanoTime())
-        val speed:Double = (40..60).random(rand).toDouble()
-        return Math.round(distInKm!!.div(speed) * 100.0) / 100.0
-    }
+        val speed:Double = (35..45).random(rand).toDouble()
 
+        Log.d("mCabHelper time", ""+speed+"Kmph, "+(round(distInKm!!.div(speed) * 100.0) / 100.0))
+        return round(((distInKm)/speed) * 6000.0) / 100.0
+    }
 }
 

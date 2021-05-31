@@ -1,5 +1,6 @@
 package com.android.collegeproject.activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.speech.RecognitionListener
@@ -20,11 +21,12 @@ class ImpairedUserActivity : AppCompatActivity() {
     private lateinit var mTextToSpeechHelper: TextToSpeechHelper
     private lateinit var mAndroidPermission: AndroidPermissions
     private lateinit var sr: SpeechRecognizer
-
+    private lateinit var mLocationHelper: LocationHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
+        mLocationHelper = LocationHelper(this, this)
         mTextToSpeechHelper = TextToSpeechHelper(this)
         mAndroidPermission = AndroidPermissions(this)
 

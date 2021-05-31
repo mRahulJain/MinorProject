@@ -19,6 +19,9 @@ class Constants {
     val CAB_FARE = "CAB_FARE"
     val CAB_ESTIMATED_TIME = "CAB_ESTIMATED_TIME"
 
+    val LOCATION = "LOCATION"
+    val LATITUDE = "LATITUTDE"
+    val LONGITUDE = "LONGITUDE"
 
     fun speak(text: String, mTextToSpeechHelper: TextToSpeechHelper) {
         mTextToSpeechHelper.speakEnglish(text)

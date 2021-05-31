@@ -11,6 +11,7 @@ import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.android.collegeproject.R
 import com.android.collegeproject.api.BookCabAPI
 import com.android.collegeproject.helper.*
@@ -36,23 +37,28 @@ class BookCabActivity: AppCompatActivity() {
     private lateinit var mDestination: String
     private lateinit var mCabHelper: BookCabHelper
     private lateinit var mSharedPreferences: SharedPreferences
+    private lateinit var mSharedPreferencesLocation: SharedPreferences
     private lateinit var mAndroidPermission: AndroidPermissions
     private lateinit var sr: SpeechRecognizer
     var retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.29.193:2332")
+        .baseUrl("http:/192.168.1.7:2332")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_cab)
-
+        mMyLocation = ArrayList<Double>()
         mLocationHelper = LocationHelper(this, this)
         mCabHelper = BookCabHelper(this)
         mTextToSpeechHelper = TextToSpeechHelper(this)
         mAndroidPermission = AndroidPermissions(this)
         mSharedPreferences = this.getSharedPreferences(
             Constants().CAB,
+            MODE_PRIVATE
+        )
+        mSharedPreferencesLocation = this.getSharedPreferences(
+            Constants().LOCATION,
             MODE_PRIVATE
         )
         val type = intent.getStringExtra("type")
@@ -116,7 +122,16 @@ class BookCabActivity: AppCompatActivity() {
         }, 500)
 
         Handler().postDelayed({
-            mMyLocation = mLocationHelper.getLocation()
+            mMyLocation.add(mSharedPreferencesLocation.getString(
+                Constants().LATITUDE,
+                ""
+            )!!.toDouble())
+            mMyLocation.add(mSharedPreferencesLocation.getString(
+                Constants().LONGITUDE,
+                ""
+            )!!.toDouble())
+
+            Log.d("mMyLocation", mMyLocation.toString())
             val from = mCabHelper.getAddressFromLocation(mMyLocation[0], mMyLocation[1])
             val toLoc = mCabHelper.getLocationFromAddress(mDestination)
             val distance = mCabHelper.calculateDistanceInKm(
@@ -211,10 +226,11 @@ class BookCabActivity: AppCompatActivity() {
 //        val hours : Int = sharedPreferences.getString(Constants().CAB_ESTIMATED_TIME, "")!!.toInt()/60
 //        val mins : Int = sharedPreferences.getString(Constants().CAB_ESTIMATED_TIME, "")!!.toInt() % 60
         activity_book_cab_estTime.text = "${sharedPreferences.getString(Constants().CAB_ESTIMATED_TIME, "")} min(s)"
-        activity_book_cab_fare.text = "RS. "+sharedPreferences.getString(Constants().CAB_FARE, "")
+        activity_book_cab_fare.text = "Rs. "+sharedPreferences.getString(Constants().CAB_FARE, "")
         activity_book_cab_loader.visibility = View.GONE
         activity_book_cab_view1.visibility = View.VISIBLE
         activity_book_cab_view2.visibility = View.VISIBLE
+        activity_book_cab_view3.visibility = View.VISIBLE
     }
 
     inner class CustomRecognitionListener: RecognitionListener {
@@ -361,3 +377,4 @@ class BookCabActivity: AppCompatActivity() {
         ).apply()
     }
 }
+

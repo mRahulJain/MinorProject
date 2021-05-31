@@ -23,4 +23,4 @@ def up():
 	return result_dic
 
 if __name__ == '__main__':
-	app.run(debug = True,use_reloader=False,host="192.168.29.193", port=int("4090"))
+	app.run(debug = True,use_reloader=False,host="192.168.1.7", port=int("4090"))

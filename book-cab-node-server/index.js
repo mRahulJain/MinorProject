@@ -32,7 +32,7 @@ mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
           if(res1.length === 0) {
             response.status(404);
             response.send("No cabs available!")
-            console.log("No cabs available!");
+            console.log("No cabs available!")
             return;
           }
           var data = res1[0];
@@ -110,7 +110,7 @@ mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
         }
         });
     });
-    
+
     //UPDATE BOOKING
     app.patch('/update-status',(request, response)=>{
       let data = request.query;
@@ -136,7 +136,7 @@ mongoClient.connect(url, {useNewUrlParser: true}, function(err,client) {
         )
       } else {
         response.json({"msg":"No data found"})
-        console.log("Unidentified Record");
+        console.log("Unidentified Record")
       }
       });
     });

@@ -86,6 +86,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_contacts"
                 android:src="@drawable/ic_contact_book" />
             <TextView
                 android:layout_width="10dp"

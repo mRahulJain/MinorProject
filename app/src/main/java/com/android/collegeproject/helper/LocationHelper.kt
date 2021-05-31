@@ -2,6 +2,8 @@ package com.android.collegeproject.helper
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -16,10 +18,14 @@ class LocationHelper : LocationListener {
     private var locationManager: LocationManager? = null
     private var mContext: Context
     private var mActivity: AppCompatActivity
-
+    private lateinit var mSharedPreferences: SharedPreferences
     constructor(context: Context,activity: AppCompatActivity) {
         this.mActivity = activity
         this.mContext = context
+        this.mSharedPreferences = this.mActivity.getSharedPreferences(
+            Constants().LOCATION,
+            MODE_PRIVATE
+        )
         startLocationUpdates()
     }
 
@@ -34,6 +40,14 @@ class LocationHelper : LocationListener {
         p0?.let { it ->
             myLat = it!!.latitude
             myLong = it!!.longitude
+            mSharedPreferences.edit().putString(
+              Constants().LATITUDE,
+              ""+myLat
+            ).apply()
+            mSharedPreferences.edit().putString(
+                Constants().LONGITUDE,
+                ""+myLong
+            ).apply()
         }
     }
 
