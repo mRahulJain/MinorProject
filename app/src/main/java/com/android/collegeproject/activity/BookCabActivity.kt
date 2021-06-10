@@ -269,6 +269,16 @@ class BookCabActivity: AppCompatActivity() {
                     getCabStatus()
                     return
                 }
+                "estimated time" -> {
+                    Handler().postDelayed({
+                        mTextToSpeechHelper.speakEnglish("${mSharedPreferences.getString(Constants().CAB_ESTIMATED_TIME, "")} min(s)")
+                    },100)
+                }
+                "ride fare" -> {
+                    Handler().postDelayed({
+                        mTextToSpeechHelper.speakEnglish("Rs. "+mSharedPreferences.getString(Constants().CAB_FARE,""))
+                    },100)
+                }
                 "delete" -> {
                     val service = retrofit.create(BookCabAPI::class.java)
                     service.deleteBooking(mSharedPreferences.getString(Constants().CAB_ID, "")!!)
